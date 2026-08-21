@@ -362,6 +362,7 @@ def draw_spider_man(x, y, pose_angle, vy, t, active_hand):
     """
     Renders Spider-Man in SIDE PROFILE facing right with realistic, non-boxy 
     retro proportions. Arms visibly swap between foreground and background.
+    Returns the exact world coordinates of the currently active web-shooting hand.
     """
     torso_deg = math.degrees(pose_angle)
     leg_tuck = clamp(vy * 0.35, -1.0, 1.0)
@@ -397,31 +398,25 @@ def draw_spider_man(x, y, pose_angle, vy, t, active_hand):
     # --- 3. ALTERNATING DUAL ARMS ---
     glLineWidth(3.0)
 
-    # Arm 1 Geometry (Left Arm)
+    # Define Left and Right Arm Positions
+    # Reaching arm (Up/Forward holding web):
+    reach_start = (0.008, 0.060)
+    reach_elbow = (0.032, 0.105)
+    reach_hand  = (0.055, 0.155)
+
+    # Cocked arm (Back in web shooter pose):
+    cock_start = (-0.004, 0.050)
+    cock_elbow = (-0.028, 0.020)
+    cock_hand  = (-0.020, -0.025)
+
     if active_hand == -1:
-        # Left Arm = FOREGROUND (Reaching Up/Forward holding web)
-        l_color = (0.92, 0.08, 0.12)
-        l_start = (0.008, 0.060)
-        l_elbow = (0.032, 0.105)
-        l_hand  = (0.055, 0.155)
-
-        # Right Arm = BACKGROUND (Cocked back in web shooter pose)
-        r_color = (0.65, 0.05, 0.08)
-        r_start = (-0.004, 0.050)
-        r_elbow = (-0.028, 0.020)
-        r_hand  = (-0.020, -0.025)
+        # Left Arm is Active (Foreground - Reaching)
+        l_color, l_start, l_elbow, l_hand = (0.92, 0.08, 0.12), reach_start, reach_elbow, reach_hand
+        r_color, r_start, r_elbow, r_hand = (0.65, 0.05, 0.08), cock_start, cock_elbow, cock_hand
     else:
-        # Right Arm = FOREGROUND (Reaching Up/Forward holding web)
-        r_color = (0.92, 0.08, 0.12)
-        r_start = (0.008, 0.060)
-        r_elbow = (0.032, 0.105)
-        r_hand  = (0.055, 0.155)
-
-        # Left Arm = BACKGROUND (Cocked back in web shooter pose)
-        l_color = (0.65, 0.05, 0.08)
-        l_start = (-0.004, 0.050)
-        l_elbow = (-0.028, 0.020)
-        l_hand  = (-0.020, -0.025)
+        # Right Arm is Active (Foreground - Reaching)
+        r_color, r_start, r_elbow, r_hand = (0.92, 0.08, 0.12), reach_start, reach_elbow, reach_hand
+        l_color, l_start, l_elbow, l_hand = (0.65, 0.05, 0.08), cock_start, cock_elbow, cock_hand
 
     # Render Background Arm First
     back_color = r_color if active_hand == -1 else l_color
@@ -472,6 +467,16 @@ def draw_spider_man(x, y, pose_angle, vy, t, active_hand):
     circle(back_hand[0], back_hand[1], 0.005)
 
     glPopMatrix()
+
+    # Calculate and return active hand position transformed into world space
+    rad = math.radians(torso_deg)
+    cos_a, sin_a = math.cos(rad), math.sin(rad)
+    active_local_x, active_local_y = reach_hand
+    
+    world_hand_x = x + (active_local_x * cos_a - active_local_y * sin_a)
+    world_hand_y = y + (active_local_x * sin_a + active_local_y * cos_a)
+    
+    return world_hand_x, world_hand_y
 
 
 # ---------------------------------------------------------------------------
@@ -612,19 +617,18 @@ def main():
             tx, ty = state["trail"][idx]
             draw_silhouette(tx, ty, (i + 1) / (count + 1) * 0.15)
 
-        # 5. Web Line (Attaches directly out of top window border)
-        hand_x_offset = 0.055
-        draw_rope(
-            state["anchor_x"], state["anchor_y"], 
-            state["hx"] + hand_x_offset, state["hy"] + 0.155, 
-            state["sag"]
-        )
-        
-        # 6. Proportional Side-Profile Spider-Man
-        draw_spider_man(
+        # 5. Render Hero Character & Compute Active Web Hand Attachment Point
+        hand_x, hand_y = draw_spider_man(
             state["hx"], state["hy"], 
             state["pose_angle"], state["vy"], 
             state["t"], state["active_hand"]
+        )
+
+        # 6. Web Line (Connects active hand directly out of top window border)
+        draw_rope(
+            state["anchor_x"], state["anchor_y"], 
+            hand_x, hand_y, 
+            state["sag"]
         )
 
         glfw.swap_buffers(win)
