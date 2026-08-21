@@ -1,4 +1,4 @@
-# Computer Graphics Experiments
+# Experiments
 
 This folder contains three computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
 
@@ -32,7 +32,7 @@ This experiment implements two classic line drawing algorithms:
 - **Plot points** at `(x1, y1)` iteratively until reaching `(x2, y2)`
 
 ### Visual Result
-![Experiment 1 - DDA and Bresenham Line Drawing](experiments/Experiment_1/image.png)
+![Experiment 1 - DDA and Bresenham Line Drawing](image.png)
 
 *The image shows a red line drawn using DDA algorithm and a green line drawn using Bresenham algorithm between the points (50, 100) to (500, 450) and (50, 500) to (500, 150) respectively.*
 
@@ -62,7 +62,7 @@ This experiment implements the **Midpoint Circle Algorithm**, an efficient metho
 The algorithm exploits the 8-way symmetry of circles, so only one octant needs to be calculated, and the rest are derived by symmetry.
 
 ### Visual Result
-![Experiment 2 - Midpoint Circle Drawing](experiments/Experiment_2/image.png)
+![Experiment 2 - Midpoint Circle Drawing](image.png)
 
 *The image shows a green circle centered at (300, 300) with radius 150, drawn using the midpoint circle algorithm.*
 
@@ -127,7 +127,7 @@ Sh(shx, shy) = [[1, shx, 0],
 - Original triangle displayed in gray, transformed triangles in various colors
 
 ### Visual Result
-![Experiment 3 - 2D Transformations](experiments/Experiment_3/image.png)
+![Experiment 3 - 2D Transformations](image.png)
 
 *The image displays the original triangle (gray) and its transformed versions under translation, rotation (45°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
 
@@ -139,13 +139,13 @@ Each experiment can be run independently using Python with OpenGL support:
 
 ```bash
 # Experiment 1
-python experiments/Experiment_1/exp1.py
+python Experiment_1/exp1.py
 
 # Experiment 2
-python experiments/Experiment_2/exp2.py
+python Experiment_2/exp2.py
 
 # Experiment 3
-python experiments/Experiment_3/exp3.py
+python Experiment_3/exp3.py
 ```
 
 **Requirements:**
