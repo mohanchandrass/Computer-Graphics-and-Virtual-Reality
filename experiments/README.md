@@ -1,6 +1,6 @@
 # Experiments
 
-This folder contains three computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
+This folder contains five computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
 
 ---
 
@@ -32,7 +32,7 @@ This experiment implements two classic line drawing algorithms:
 - **Plot points** at `(x1, y1)` iteratively until reaching `(x2, y2)`
 
 ### Visual Result
-![Experiment 1 - DDA and Bresenham Line Drawing](image.png)
+![Experiment 1 - DDA and Bresenham Line Drawing](Experiment_1/image.png)
 
 *The image shows a red line drawn using DDA algorithm and a green line drawn using Bresenham algorithm between the points (50, 100) to (500, 450) and (50, 500) to (500, 150) respectively.*
 
@@ -62,7 +62,7 @@ This experiment implements the **Midpoint Circle Algorithm**, an efficient metho
 The algorithm exploits the 8-way symmetry of circles, so only one octant needs to be calculated, and the rest are derived by symmetry.
 
 ### Visual Result
-![Experiment 2 - Midpoint Circle Drawing](image.png)
+![Experiment 2 - Midpoint Circle Drawing](Experiment_2/image.png)
 
 *The image shows a green circle centered at (300, 300) with radius 150, drawn using the midpoint circle algorithm.*
 
@@ -127,9 +127,72 @@ Sh(shx, shy) = [[1, shx, 0],
 - Original triangle displayed in gray, transformed triangles in various colors
 
 ### Visual Result
-![Experiment 3 - 2D Transformations](image.png)
+![Experiment 3 - 2D Transformations](Experiment_3/image.png)
 
 *The image displays the original triangle (gray) and its transformed versions under translation, rotation (45°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
+
+---
+
+## Experiment 4: Composite 2D Transformations Using Matrix Representation
+
+**File:** `Experiment_4/exp4.py`
+
+### Overview
+This experiment demonstrates **composite 2D geometric transformations** using matrix representation with homogeneous coordinates. It applies a sequence of scaling, rotation, and translation transformations to a 2D triangle and displays the individual and composite matrices alongside the visual output.
+
+### Formulas and Operations
+
+#### Homogeneous Coordinates & 3x3 Matrices
+- **Scaling Matrix S:** `sx = 1.5, sy = 1.5`
+- **Rotation Matrix R:** `θ = 45°` (`math.radians(45)`)
+- **Translation Matrix T:** `tx = 250, ty = 120`
+
+#### Composite Matrix Formula
+- **Pipeline:** `Original -> Scaling -> Rotation -> Translation -> Final`
+- **Composite Matrix:** `M = T x R x S`
+- **Transformed Point:** `P' = M x P`
+- **Non-Commutativity:** Note that matrix multiplication is non-commutative (`T x R x S != S x R x T`), so the transformations are evaluated right-to-left.
+
+### Visual Result
+![Experiment 4 - Composite 2D Transformations](Experiment_4/image.png)
+
+*The image displays the original triangle (gray), the composite transformed result (red), and the individual transformation matrices alongside the computed 3x3 composite matrix.*
+
+---
+
+## Experiment 5: Cohen-Sutherland Line Clipping Algorithm
+
+**File:** `Experiment_5/exp5.py`
+
+### Overview
+This experiment implements the **Cohen-Sutherland Line Clipping Algorithm**, an efficient 2D line clipping technique that uses 4-bit region codes (outcodes) to clip line segments against a rectangular viewing window.
+
+### Formulas and Operations
+
+#### Region Codes (Outcodes)
+The 2D space is divided into 9 regions defined by 4-bit region codes `[TOP, BOTTOM, RIGHT, LEFT]`:
+- **TOP** (`1000` = 8): `y > Y_MAX`
+- **BOTTOM** (`0100` = 4): `y < Y_MIN`
+- **RIGHT** (`0010` = 2): `x > X_MAX`
+- **LEFT** (`0001` = 1): `x < X_MIN`
+- **INSIDE** (`0000` = 0)
+
+#### Decision & Clipping Logic
+- **Trivial Accept:** `code1 == 0` and `code2 == 0`
+- **Trivial Reject:** `(code1 & code2) != 0`
+- **Intersection Formulas:**
+  - **Top (`y = Y_MAX`):** `x = x1 + (x2 - x1) * (Y_MAX - y1) / (y2 - y1)`
+  - **Bottom (`y = Y_MIN`):** `x = x1 + (x2 - x1) * (Y_MIN - y1) / (y2 - y1)`
+  - **Right (`x = X_MAX`):** `y = y1 + (y2 - y1) * (X_MAX - x1) / (x2 - x1)`
+  - **Left (`x = X_MIN`):** `y = y1 + (y2 - y1) * (X_MIN - x1) / (x2 - x1)`
+
+#### Window Coordinates
+- `X_MIN = 100`, `X_MAX = 500`, `Y_MIN = 100`, `Y_MAX = 400`
+
+### Visual Result
+![Experiment 5 - Cohen-Sutherland Line Clipping](Experiment_5/image.png)
+
+*The image shows a side-by-side comparison: the left panel displays the original test lines inside/outside the blue clipping window, the middle panel shows only the accepted and clipped line segments in green, and the right panel details the 4-bit region codes and step-by-step clipping algorithm logic.*
 
 ---
 
@@ -146,6 +209,12 @@ python Experiment_2/exp2.py
 
 # Experiment 3
 python Experiment_3/exp3.py
+
+# Experiment 4
+python Experiment_4/exp4.py
+
+# Experiment 5
+python Experiment_5/exp5.py
 ```
 
 **Requirements:**

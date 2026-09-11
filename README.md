@@ -1,6 +1,6 @@
 # Computer Graphics Experiments
 
-This folder contains three computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
+This folder contains five computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
 
 ---
 
@@ -133,6 +133,69 @@ Sh(shx, shy) = [[1, shx, 0],
 
 ---
 
+## Experiment 4: Composite 2D Transformations Using Matrix Representation
+
+**File:** `experiments/Experiment_4/exp4.py`
+
+### Overview
+This experiment demonstrates **composite 2D geometric transformations** using matrix representation with homogeneous coordinates. It applies a sequence of scaling, rotation, and translation transformations to a 2D triangle and displays the individual and composite matrices alongside the visual output.
+
+### Formulas and Operations
+
+#### Homogeneous Coordinates & 3x3 Matrices
+- **Scaling Matrix S:** `sx = 1.5, sy = 1.5`
+- **Rotation Matrix R:** `θ = 45°` (`math.radians(45)`)
+- **Translation Matrix T:** `tx = 250, ty = 120`
+
+#### Composite Matrix Formula
+- **Pipeline:** `Original -> Scaling -> Rotation -> Translation -> Final`
+- **Composite Matrix:** `M = T x R x S`
+- **Transformed Point:** `P' = M x P`
+- **Non-Commutativity:** Note that matrix multiplication is non-commutative (`T x R x S != S x R x T`), so the transformations are evaluated right-to-left.
+
+### Visual Result
+![Experiment 4 - Composite 2D Transformations](experiments/Experiment_4/image.png)
+
+*The image displays the original triangle (gray), the composite transformed result (red), and the individual transformation matrices alongside the computed 3x3 composite matrix.*
+
+---
+
+## Experiment 5: Cohen-Sutherland Line Clipping Algorithm
+
+**File:** `experiments/Experiment_5/exp5.py`
+
+### Overview
+This experiment implements the **Cohen-Sutherland Line Clipping Algorithm**, an efficient 2D line clipping technique that uses 4-bit region codes (outcodes) to clip line segments against a rectangular viewing window.
+
+### Formulas and Operations
+
+#### Region Codes (Outcodes)
+The 2D space is divided into 9 regions defined by 4-bit region codes `[TOP, BOTTOM, RIGHT, LEFT]`:
+- **TOP** (`1000` = 8): `y > Y_MAX`
+- **BOTTOM** (`0100` = 4): `y < Y_MIN`
+- **RIGHT** (`0010` = 2): `x > X_MAX`
+- **LEFT** (`0001` = 1): `x < X_MIN`
+- **INSIDE** (`0000` = 0)
+
+#### Decision & Clipping Logic
+- **Trivial Accept:** `code1 == 0` and `code2 == 0`
+- **Trivial Reject:** `(code1 & code2) != 0`
+- **Intersection Formulas:**
+  - **Top (`y = Y_MAX`):** `x = x1 + (x2 - x1) * (Y_MAX - y1) / (y2 - y1)`
+  - **Bottom (`y = Y_MIN`):** `x = x1 + (x2 - x1) * (Y_MIN - y1) / (y2 - y1)`
+  - **Right (`x = X_MAX`):** `y = y1 + (y2 - y1) * (X_MAX - x1) / (x2 - x1)`
+  - **Left (`x = X_MIN`):** `y = y1 + (y2 - y1) * (X_MIN - x1) / (x2 - x1)`
+
+#### Window Coordinates
+- `X_MIN = 100`, `X_MAX = 500`, `Y_MIN = 100`, `Y_MAX = 400`
+
+### Visual Result
+![Experiment 5 - Cohen-Sutherland Line Clipping](experiments/Experiment_5/image.png)
+
+*The image shows a side-by-side comparison: the left panel displays the original test lines inside/outside the blue clipping window, the middle panel shows only the accepted and clipped line segments in green, and the right panel details the 4-bit region codes and step-by-step clipping algorithm logic.*
+
+---
+
 ## How to Run
 
 Each experiment can be run independently using Python with OpenGL support:
@@ -146,6 +209,12 @@ python experiments/Experiment_2/exp2.py
 
 # Experiment 3
 python experiments/Experiment_3/exp3.py
+
+# Experiment 4
+python experiments/Experiment_4/exp4.py
+
+# Experiment 5
+python experiments/Experiment_5/exp5.py
 ```
 
 **Requirements:**
