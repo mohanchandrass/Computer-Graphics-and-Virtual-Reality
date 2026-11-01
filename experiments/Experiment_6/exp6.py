@@ -120,6 +120,8 @@ def render_scene():
 
 def add_labels_and_save(output_path):
     """Capture framebuffer and add crisp informative annotations."""
+    glReadBuffer(GL_BACK)
+    glFinish()
     glPixelStorei(GL_PACK_ALIGNMENT, 1)
     data = glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE)
     image = Image.frombytes("RGB", (WINDOW_WIDTH, WINDOW_HEIGHT), data)
@@ -178,10 +180,9 @@ def main():
     glfw.make_context_current(window)
 
     render_scene()
-    glfw.swap_buffers(window)
-
     output_path = os.path.join(os.path.dirname(__file__), "image.png")
     add_labels_and_save(output_path)
+    glfw.swap_buffers(window)
 
     if headless:
         glfw.destroy_window(window)

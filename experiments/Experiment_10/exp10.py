@@ -159,6 +159,8 @@ def render_scene(cur_angle):
 
 def add_labels_and_save(output_path):
     """Capture screen and overlay detailed viewing pipeline documentation."""
+    glReadBuffer(GL_BACK)
+    glFinish()
     glPixelStorei(GL_PACK_ALIGNMENT, 1)
     data = glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE)
     image = Image.frombytes("RGB", (WINDOW_WIDTH, WINDOW_HEIGHT), data)
@@ -230,10 +232,9 @@ def main():
 
     angle = 35.0
     render_scene(angle)
-    glfw.swap_buffers(window)
-
     output_path = os.path.join(os.path.dirname(__file__), "image.png")
     add_labels_and_save(output_path)
+    glfw.swap_buffers(window)
 
     if headless:
         glfw.destroy_window(window)

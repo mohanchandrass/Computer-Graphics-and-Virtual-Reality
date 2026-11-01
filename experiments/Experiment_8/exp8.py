@@ -91,6 +91,8 @@ def create_shader_program():
 
 def add_labels_and_save(output_path):
     """Capture the rendered frame and overlay informative pipeline documentation."""
+    glReadBuffer(GL_BACK)
+    glFinish()
     glPixelStorei(GL_PACK_ALIGNMENT, 1)
     data = glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE)
     image = Image.frombytes("RGB", (WINDOW_WIDTH, WINDOW_HEIGHT), data)
@@ -241,10 +243,9 @@ def main():
     # Capture first frame with slight angle for presentation
     initial_angle = 0.35
     render(initial_angle, 1.2)
-    glfw.swap_buffers(window)
-
     output_path = os.path.join(os.path.dirname(__file__), "image.png")
     add_labels_and_save(output_path)
+    glfw.swap_buffers(window)
 
     if headless:
         glDeleteVertexArrays(1, [VAO])

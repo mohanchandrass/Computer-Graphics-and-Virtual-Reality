@@ -287,6 +287,8 @@ def update_physics(dt):
 
 def add_hud_and_save(output_path):
     """Capture 3D scene and render a rich game HUD overlay."""
+    glReadBuffer(GL_BACK)
+    glFinish()
     glPixelStorei(GL_PACK_ALIGNMENT, 1)
     data = glReadPixels(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE)
     image = Image.frombytes("RGB", (WINDOW_WIDTH, WINDOW_HEIGHT), data)
@@ -368,10 +370,9 @@ def main():
     # Set up initial display
     anim_time = 1.5
     draw_scene()
-    glfw.swap_buffers(window)
-
     output_path = os.path.join(os.path.dirname(__file__), "image.png")
     add_hud_and_save(output_path)
+    glfw.swap_buffers(window)
 
     if headless:
         glfw.destroy_window(window)
