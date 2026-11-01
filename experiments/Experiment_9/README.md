@@ -1,4 +1,4 @@
-﻿# Experiment 9: Simple Interactive 3D Scene
+# Experiment 9: Simple Interactive 3D Scene
 
 **File:** `exp9.py`  
 **Unity Project:** `unity_project/`
@@ -53,11 +53,14 @@ The implementation directly mirrors the component-based architecture of Unity 3D
 - **Canvas / HUD (`GameHUD.cs`):** Real-time UI displaying collected items count and objective status.
 
 ## Visual Result
-<img src="image copy.png" alt="Experiment 9 - Unity Interactive 3D Scene" width="650">
 
-> **Live Demo (GIF):** [LAB9.gif](LAB9.gif) — Full gameplay recording of the Unity scene in action.
+<img src="LAB9.gif" alt="Experiment 9 - Unity Interactive 3D Scene Animation" width="650">
 
-*The screenshot shows the Unity 3D interactive scene: coloured obstacle cubes, golden collectible spheres on a green ground plane, and the HUD overlay.*
+> **Animated Demo (Unity 2022.3 LTS):** `LAB9.gif` showcases the live interactive Unity 3D scene — third-person camera navigation (`CameraFollow.cs`), player locomotion and jump mechanics (`PlayerController.cs`), rotating obstacles (`RotatingObject.cs`), animated golden collectible gems with trigger pickups (`Collectible.cs`), and dynamic HUD telemetry (`GameHUD.cs`).
+
+<img src="image copy.png" alt="Experiment 9 - Unity Interactive 3D Scene Static View" width="650">
+
+*The static view shows the complete arena layout with player capsule, colored obstacle blocks, collectible diamonds, and control bindings.*
 
 ---
 

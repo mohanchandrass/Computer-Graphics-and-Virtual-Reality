@@ -357,11 +357,13 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 - **Pickup Radius:** Gathered when Euclidean distance $\sqrt{(P_x - C_x)^2 + (P_z - C_z)^2} < 1.3\text{m}$.
 
 ### Visual Result
+<img src="experiments/Experiment_9/LAB9.gif" alt="Experiment 9 - Unity Interactive 3D Scene Animation" width="650">
+
+> **Live Demo (GIF):** [LAB9.gif](experiments/Experiment_9/LAB9.gif) — Full gameplay recording of the interactive Unity 3D scene.
+
 <img src="experiments/Experiment_9/image copy.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
 
-> **Live Demo (GIF):** [LAB9.gif](experiments/Experiment_9/LAB9.gif) — Full gameplay recording of the Unity 3D scene.
-
-*The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
+*The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating an arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 
 ---
 
@@ -506,9 +508,8 @@ python projects/spider-man.py
 
 ### Case Study 3: RoomSpace AR — Interactive 3D Furniture Placement & Interior Design System
 
-**Folder:** [`projects/CaseStudy3_RoomSpace/`](projects/CaseStudy3_RoomSpace/)  
-**Case Study Document:** [`projects/CS4104_CG_VR_Case_Study_Assignment_With_RV_Logo.docx`](projects/CS4104_CG_VR_Case_Study_Assignment_With_RV_Logo.docx)  
-**Detailed Project Documentation:** [`projects/CaseStudy3_RoomSpace/README.md`](projects/CaseStudy3_RoomSpace/README.md)
+**Topic:** Case Study 3 — Retail and Remote Commerce  
+**Environment:** Unity 2022.3 LTS  
 
 ### Overview
 RoomSpace AR is a 3D architectural interior design and retail configurator developed in Unity 2022.3 LTS for **CS4104 Case Study 3 (Retail and Remote Commerce)**. The application features photorealistic CC0 Poly Haven 3D furniture, dynamic floor raycast placement, 360° yaw rotation manipulation, dual perspective/orthographic camera projection modes, physically-based rendering (PBR) wall materials, and JSON room state serialization.
@@ -523,15 +524,12 @@ RoomSpace AR is a 3D architectural interior design and retail configurator devel
 - **UI HUD & Hotkeys:** Interactive catalogue, inspector, toolbar, transient toast feedback, and `[H]` key to hide UI for cinematic rendering.
 
 ### Visual Result
-<img src="projects/CaseStudy3_RoomSpace/Documentation/Screenshots/Application/roomspace_main_interface.png" alt="RoomSpace AR Main Application Interface" width="700">
+<img src="projects/roomspace_overview_demo.gif" alt="RoomSpace AR Overview Demo" width="700">
 
-*The image shows the RoomSpace AR interface in Unity Game view with photorealistic furniture, active catalogue, and material customization studio.*
+> **Animated Demo:** `roomspace_overview_demo.gif` shows the RoomSpace AR architectural configurator in real time — 3D spherical orbit navigation, furniture interaction, and real-time PBR lighting.
 
-### Video & GIF Demonstrations
-- **Room Overview & 3D Orbit:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/roomspace_overview_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/roomspace_overview_demo.gif)
-- **Camera Projection Modes:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/camera_mode_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/camera_mode_demo.gif)
-- **Furniture Catalogue & Placement:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/furniture_placement_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/furniture_placement_demo.gif)
-- **Object Manipulation & Rotation:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/furniture_manipulation_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/furniture_manipulation_demo.gif)
-- **PBR Material Studio:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/material_customization_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/material_customization_demo.gif)
+<img src="projects/roomspace_main_interface.png" alt="RoomSpace AR Main Application Interface" width="700">
+
+*The static view shows the complete RoomSpace AR interface with active 3D furniture catalogue, placement raycaster, and material customization studio.*
 
 ---

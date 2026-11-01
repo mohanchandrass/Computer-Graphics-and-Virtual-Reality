@@ -357,9 +357,13 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 - **Pickup Radius:** Gathered when Euclidean distance $\sqrt{(P_x - C_x)^2 + (P_z - C_z)^2} < 1.3\text{m}$.
 
 ### Visual Result
+<img src="Experiment_9/LAB9.gif" alt="Experiment 9 - Unity Interactive 3D Scene Animation" width="650">
+
+> **Live Demo (GIF):** [LAB9.gif](Experiment_9/LAB9.gif) — Animated recording of the Unity 3D interactive scene showing third-person camera tracking, player kinematics, collectibles, and HUD.
+
 <img src="Experiment_9/image copy.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
 
-*The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
+*The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating an arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 
 ---
 

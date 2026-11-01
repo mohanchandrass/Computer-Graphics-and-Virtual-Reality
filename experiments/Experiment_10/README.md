@@ -66,13 +66,13 @@ $$y_s = y_v + \frac{y_{\text{ndc}} + 1}{2} \cdot h_v$$
 
 ## Visual Result
 
-<img src="LAB10.gif" alt="Experiment 10 - 3D Viewing Pipeline Animation" width="650">
+<img src="LAB10.gif" alt="Experiment 10 - Unity 3D Viewing Pipeline Animation" width="650">
 
-> **Animated Demo:** `LAB10.gif` demonstrates the dual-viewport 3D viewing pipeline in real time — the left viewport renders the rotating cube under Orthographic projection (preserving true geometric scale and parallel lines), while the right viewport renders the cube under Perspective projection with natural depth foreshortening.
+> **Animated Demo (Unity 2022.3 LTS):** `LAB10.gif` demonstrates the dual-viewport 3D viewing pipeline running in real time — the left viewport renders the procedural six-colour cube under Orthographic projection (preserving true geometric scale and parallel lines), while the right viewport renders the cube under Perspective projection with realistic depth foreshortening.
 
 <img src="image.png" alt="Experiment 10 - 3D Viewing Pipeline" width="650">
 
-*The static capture highlights the complete 3D viewing pipeline side-by-side comparison with projection parameters and viewport boundaries.*
+*The static capture highlights the dual-viewport side-by-side comparison with projection parameters, LookAt transformation, and viewport boundaries.*
 
 ---
 

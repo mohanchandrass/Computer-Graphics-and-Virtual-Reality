@@ -13,7 +13,9 @@ notes
 ROOMSPACE_*.md
 projects/CaseStudy3_RoomSpace/
 projects/*.docx
+projects/*.pdf
 *.docx
+*.pdf
 
 # Unity generated folders (do NOT commit these)
 [Ll]ibrary/
