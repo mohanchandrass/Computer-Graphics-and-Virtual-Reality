@@ -3,17 +3,35 @@
 **Name:** MOHAN CHANDRA S S  
 **USN:** 1RVU23CSE282  
 
-This repository contains ten computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
+This repository contains ten computer graphics and virtual reality laboratory experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental computer graphics algorithm, pipeline stage, or interactive 3D simulation with mathematical explanations, executable code, and visual results.
+
+---
+
+## List of Laboratory Programs
+
+| Sl. No. | Laboratory Experiment | Folder | Program |
+|:-------:|:----------------------|:------:|:-------:|
+| **1** | [Implement DDA and Bresenham line drawing algorithms](#experiment-1-dda-and-bresenham-line-drawing-algorithms) | [`Experiment_1/`](experiments/Experiment_1/) | [`exp1.py`](experiments/Experiment_1/exp1.py) |
+| **2** | [Implement the Midpoint Circle Drawing Algorithm](#experiment-2-midpoint-circle-drawing-algorithm) | [`Experiment_2/`](experiments/Experiment_2/) | [`exp2.py`](experiments/Experiment_2/exp2.py) |
+| **3** | [Implement 2D transformations using homogeneous coordinates](#experiment-3-2d-transformations-using-homogeneous-coordinates) | [`Experiment_3/`](experiments/Experiment_3/) | [`exp3.py`](experiments/Experiment_3/exp3.py) |
+| **4** | [Implement composite transformations using matrix representation](#experiment-4-composite-2d-transformations-using-matrix-representation) | [`Experiment_4/`](experiments/Experiment_4/) | [`exp4.py`](experiments/Experiment_4/exp4.py) |
+| **5** | [Implement the Cohen–Sutherland line clipping algorithm](#experiment-5-cohen-sutherland-line-clipping-algorithm) | [`Experiment_5/`](experiments/Experiment_5/) | [`exp5.py`](experiments/Experiment_5/exp5.py) |
+| **6** | [Implement the Z-buffer algorithm for hidden surface removal](#experiment-6-z-buffer-algorithm-for-hidden-surface-removal) | [`Experiment_6/`](experiments/Experiment_6/) | [`exp6.py`](experiments/Experiment_6/exp6.py) |
+| **7** | [Implement the Phong illumination model for a 3D object](#experiment-7-phong-illumination-model-for-a-3d-object) | [`Experiment_7/`](experiments/Experiment_7/) | [`exp7.py`](experiments/Experiment_7/exp7.py) |
+| **8** | [Develop a basic OpenGL program using vertex and fragment shaders](#experiment-8-opengl-vertex-and-fragment-shaders) | [`Experiment_8/`](experiments/Experiment_8/) | [`exp8.py`](experiments/Experiment_8/exp8.py) |
+| **9** | [Create a simple interactive 3D scene using Unity](#experiment-9-simple-interactive-3d-scene) | [`Experiment_9/`](experiments/Experiment_9/) | [`exp9.py`](experiments/Experiment_9/exp9.py) |
+| **10** | [Implement the 3D viewing pipeline, including projection and viewport mapping](#experiment-10-3d-viewing-pipeline-projection-and-viewport-mapping) | [`Experiment_10/`](experiments/Experiment_10/) | [`exp10.py`](experiments/Experiment_10/exp10.py) |
 
 ---
 
 ## Experiment 1: DDA and Bresenham Line Drawing Algorithms
 
-**File:** `experiments/Experiment_1/exp1.py`
+**Folder:** [`experiments/Experiment_1/`](experiments/Experiment_1/)  
+**Program:** [`experiments/Experiment_1/exp1.py`](experiments/Experiment_1/exp1.py)
 
 ### Overview
 This experiment implements two classic line drawing algorithms:
-- **DDA (Digital Differential Analgorithm)** - A simple line drawing algorithm that uses floating-point arithmetic
+- **DDA (Digital Differential Analyzer)** - A simple line drawing algorithm that uses floating-point arithmetic
 - **Bresenham's Line Algorithm** - An efficient line drawing algorithm using integer arithmetic
 
 ### Formulas and Operations
@@ -35,7 +53,7 @@ This experiment implements two classic line drawing algorithms:
 - **Plot points** at `(x1, y1)` iteratively until reaching `(x2, y2)`
 
 ### Visual Result
-![Experiment 1 - DDA and Bresenham Line Drawing](experiments/Experiment_1/image.png)
+<img src="experiments/Experiment_1/image.png" alt="Experiment 1 - DDA and Bresenham Line Drawing" width="650">
 
 *The image shows a red line drawn using DDA algorithm and a green line drawn using Bresenham algorithm between the points (50, 100) to (500, 450) and (50, 500) to (500, 150) respectively.*
 
@@ -43,7 +61,8 @@ This experiment implements two classic line drawing algorithms:
 
 ## Experiment 2: Midpoint Circle Drawing Algorithm
 
-**File:** `experiments/Experiment_2/exp2.py`
+**Folder:** [`experiments/Experiment_2/`](experiments/Experiment_2/)  
+**Program:** [`experiments/Experiment_2/exp2.py`](experiments/Experiment_2/exp2.py)
 
 ### Overview
 This experiment implements the **Midpoint Circle Algorithm**, an efficient method for drawing circles using only integer arithmetic and symmetry.
@@ -65,7 +84,7 @@ This experiment implements the **Midpoint Circle Algorithm**, an efficient metho
 The algorithm exploits the 8-way symmetry of circles, so only one octant needs to be calculated, and the rest are derived by symmetry.
 
 ### Visual Result
-![Experiment 2 - Midpoint Circle Drawing](experiments/Experiment_2/image.png)
+<img src="experiments/Experiment_2/image.png" alt="Experiment 2 - Midpoint Circle Drawing" width="650">
 
 *The image shows a green circle centered at (300, 300) with radius 150, drawn using the midpoint circle algorithm.*
 
@@ -73,7 +92,8 @@ The algorithm exploits the 8-way symmetry of circles, so only one octant needs t
 
 ## Experiment 3: 2D Transformations Using Homogeneous Coordinates
 
-**File:** `experiments/Experiment_3/exp3.py`
+**Folder:** [`experiments/Experiment_3/`](experiments/Experiment_3/)  
+**Program:** [`experiments/Experiment_3/exp3.py`](experiments/Experiment_3/exp3.py)
 
 ### Overview
 This experiment demonstrates **2D geometric transformations** using homogeneous coordinates. It applies multiple transformation matrices to a triangle and displays the original and transformed results.
@@ -130,7 +150,7 @@ Sh(shx, shy) = [[1, shx, 0],
 - Original triangle displayed in gray, transformed triangles in various colors
 
 ### Visual Result
-![Experiment 3 - 2D Transformations](experiments/Experiment_3/image.png)
+<img src="experiments/Experiment_3/image.png" alt="Experiment 3 - 2D Transformations" width="650">
 
 *The image displays the original triangle (gray) and its transformed versions under translation, rotation (45°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
 
@@ -138,7 +158,8 @@ Sh(shx, shy) = [[1, shx, 0],
 
 ## Experiment 4: Composite 2D Transformations Using Matrix Representation
 
-**File:** `experiments/Experiment_4/exp4.py`
+**Folder:** [`experiments/Experiment_4/`](experiments/Experiment_4/)  
+**Program:** [`experiments/Experiment_4/exp4.py`](experiments/Experiment_4/exp4.py)
 
 ### Overview
 This experiment demonstrates **composite 2D geometric transformations** using matrix representation with homogeneous coordinates. It applies a sequence of scaling, rotation, and translation transformations to a 2D triangle and displays the individual and composite matrices alongside the visual output.
@@ -157,7 +178,7 @@ This experiment demonstrates **composite 2D geometric transformations** using ma
 - **Non-Commutativity:** Note that matrix multiplication is non-commutative (`T x R x S != S x R x T`), so the transformations are evaluated right-to-left.
 
 ### Visual Result
-![Experiment 4 - Composite 2D Transformations](experiments/Experiment_4/image.png)
+<img src="experiments/Experiment_4/image.png" alt="Experiment 4 - Composite 2D Transformations" width="650">
 
 *The image displays the original triangle (gray), the composite transformed result (red), and the individual transformation matrices alongside the computed 3x3 composite matrix.*
 
@@ -165,7 +186,8 @@ This experiment demonstrates **composite 2D geometric transformations** using ma
 
 ## Experiment 5: Cohen-Sutherland Line Clipping Algorithm
 
-**File:** `experiments/Experiment_5/exp5.py`
+**Folder:** [`experiments/Experiment_5/`](experiments/Experiment_5/)  
+**Program:** [`experiments/Experiment_5/exp5.py`](experiments/Experiment_5/exp5.py)
 
 ### Overview
 This experiment implements the **Cohen-Sutherland Line Clipping Algorithm**, an efficient 2D line clipping technique that uses 4-bit region codes (outcodes) to clip line segments against a rectangular viewing window.
@@ -193,7 +215,7 @@ The 2D space is divided into 9 regions defined by 4-bit region codes `[TOP, BOTT
 - `X_MIN = 100`, `X_MAX = 500`, `Y_MIN = 100`, `Y_MAX = 400`
 
 ### Visual Result
-![Experiment 5 - Cohen-Sutherland Line Clipping](experiments/Experiment_5/image.png)
+<img src="experiments/Experiment_5/image.png" alt="Experiment 5 - Cohen-Sutherland Line Clipping" width="650">
 
 *The image shows a side-by-side comparison: the left panel displays the original test lines inside/outside the blue clipping window, the middle panel shows only the accepted and clipped line segments in green, and the right panel details the 4-bit region codes and step-by-step clipping algorithm logic.*
 
@@ -201,7 +223,8 @@ The 2D space is divided into 9 regions defined by 4-bit region codes `[TOP, BOTT
 
 ## Experiment 6: Z-Buffer Algorithm for Hidden Surface Removal
 
-**File:** `experiments/Experiment_6/exp6.py`
+**Folder:** [`experiments/Experiment_6/`](experiments/Experiment_6/)  
+**Program:** [`experiments/Experiment_6/exp6.py`](experiments/Experiment_6/exp6.py)
 
 ### Overview
 This experiment implements the **Z-buffer (Depth-Buffer) Algorithm**, a foundational image-space approach for hidden surface removal in 3D computer graphics. By maintaining a 2D depth buffer alongside the color framebuffer, the algorithm ensures that surfaces closest to the viewer are correctly drawn, while occluded surfaces are discarded, regardless of polygon submission order.
@@ -227,7 +250,7 @@ For each projected fragment at $(x, y)$ with depth $z$:
 - **Right Viewport (Depth Test Enabled):** Hardware Z-buffering with `GL_LESS` resolves visibility per-pixel, correctly keeping the closer red triangle in front.
 
 ### Visual Result
-![Experiment 6 - Z-Buffer Algorithm for Hidden Surface Removal](experiments/Experiment_6/image.png)
+<img src="experiments/Experiment_6/image.png" alt="Experiment 6 - Z-Buffer Algorithm for Hidden Surface Removal" width="650">
 
 *The image displays a side-by-side comparison: the left viewport shows incorrect visibility when depth testing is disabled (later-drawn green and blue triangles incorrectly overwrite the red triangle), while the right viewport demonstrates correct hidden surface removal using the Z-buffer algorithm, preserving the closer red triangle in front.*
 
@@ -235,7 +258,8 @@ For each projected fragment at $(x, y)$ with depth $z$:
 
 ## Experiment 7: Phong Illumination Model for a 3D Object
 
-**File:** `experiments/Experiment_7/exp7.py`
+**Folder:** [`experiments/Experiment_7/`](experiments/Experiment_7/)  
+**Program:** [`experiments/Experiment_7/exp7.py`](experiments/Experiment_7/exp7.py)
 
 ### Overview
 This experiment implements the **Phong Illumination Model**, a standard local shading formulation that evaluates the total reflected light intensity on 3D surfaces as the sum of ambient, diffuse (Lambertian), and specular components.
@@ -262,7 +286,7 @@ The program splits the illumination model into four distinct panels:
 4. **Full Phong Model ($I$):** Complete combined illumination producing realistic 3D appearance.
 
 ### Visual Result
-![Experiment 7 - Phong Illumination Model](experiments/Experiment_7/image.png)
+<img src="experiments/Experiment_7/image.png" alt="Experiment 7 - Phong Illumination Model" width="650">
 
 *The image displays a comprehensive four-panel decomposition of the Phong illumination model applied to a 3D sphere: Panel 1 shows the uniform Ambient component ($I_{amb}$), Panel 2 displays the Lambertian Diffuse shading ($I_{diff}$), Panel 3 isolates the glossy Specular highlight ($I_{spec}$), and Panel 4 combines all three into the complete photorealistic Phong illumination model.*
 
@@ -270,7 +294,8 @@ The program splits the illumination model into four distinct panels:
 
 ## Experiment 8: OpenGL Vertex and Fragment Shaders
 
-**File:** `experiments/Experiment_8/exp8.py`
+**Folder:** [`experiments/Experiment_8/`](experiments/Experiment_8/)  
+**Program:** [`experiments/Experiment_8/exp8.py`](experiments/Experiment_8/exp8.py)
 
 ### Overview
 This experiment demonstrates the **modern programmable graphics pipeline** in OpenGL using GLSL (OpenGL Shading Language) version 3.3 Core Profile. It showcases GPU buffer management with VAO/VBOs, vertex position transformation via a vertex shader, and per-vertex color interpolation modulated by a fragment shader.
@@ -297,7 +322,7 @@ $$\text{FragColor} = \text{vec4}(\text{vertexColor} \times (0.75 + 0.25 \cdot \t
 - **VAO (Vertex Array Object):** Configures and enables vertex attribute pointers 0 (Position) and 1 (Color).
 
 ### Visual Result
-![Experiment 8 - OpenGL Vertex and Fragment Shaders](experiments/Experiment_8/image.png)
+<img src="experiments/Experiment_8/image.png" alt="Experiment 8 - OpenGL Vertex and Fragment Shaders" width="650">
 
 *The image shows the modern OpenGL 3.3 programmable pipeline in action: an animated, smoothly color-interpolated RGB triangle rendered using custom GLSL vertex and fragment shaders with per-vertex color attributes, GPU buffer management (VAO/VBO), and dynamic rotation uniforms.*
 
@@ -305,7 +330,8 @@ $$\text{FragColor} = \text{vec4}(\text{vertexColor} \times (0.75 + 0.25 \cdot \t
 
 ## Experiment 9: Simple Interactive 3D Scene
 
-**File:** `experiments/Experiment_9/exp9.py`
+**Folder:** [`experiments/Experiment_9/`](experiments/Experiment_9/)  
+**Program:** [`experiments/Experiment_9/exp9.py`](experiments/Experiment_9/exp9.py)
 
 ### Overview
 This experiment demonstrates the construction of a **simple interactive 3D scene**, incorporating game engine concepts (as seen in Unity) directly in Python using OpenGL. The scene features a 3D arena floor grid, a controllable player character, third-person camera tracking, 3D obstacle blocks, rotating animated collectible gems, collision detection, and a real-time Heads-Up Display (HUD).
@@ -330,7 +356,7 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 - **Pickup Radius:** Gathered when Euclidean distance $\sqrt{(P_x - C_x)^2 + (P_z - C_z)^2} < 1.3\text{m}$.
 
 ### Visual Result
-![Experiment 9 - Simple Interactive 3D Scene](experiments/Experiment_9/image.png)
+<img src="experiments/Experiment_9/image.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
 
 *The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 
@@ -338,7 +364,8 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 
 ## Experiment 10: 3D Viewing Pipeline, Projection and Viewport Mapping
 
-**File:** `experiments/Experiment_10/exp10.py`
+**Folder:** [`experiments/Experiment_10/`](experiments/Experiment_10/)  
+**Program:** [`experiments/Experiment_10/exp10.py`](experiments/Experiment_10/exp10.py)
 
 ### Overview
 This experiment implements the complete **3D Viewing Pipeline**, demonstrating how 3D geometric models are converted into a 2D screen image through sequential coordinate transformations. It highlights the difference between **Orthographic Projection** (engineering / CAD perspective) and **Perspective Projection** (natural human vision) using side-by-side viewports displaying an animated multi-colored 3D cube.
@@ -365,7 +392,7 @@ Transforms Normalized Device Coordinates (NDC) in $[-1, 1]^2$ to physical pixel 
 $$x_s = x_v + \frac{x_{\text{ndc}} + 1}{2} \cdot w_v, \quad y_s = y_v + \frac{y_{\text{ndc}} + 1}{2} \cdot h_v$$
 
 ### Visual Result
-![Experiment 10 - 3D Viewing Pipeline](experiments/Experiment_10/image.png)
+<img src="experiments/Experiment_10/image.png" alt="Experiment 10 - 3D Viewing Pipeline" width="650">
 
 *The image demonstrates the complete 3D viewing pipeline in a side-by-side comparison: the left viewport displays an orthographic projection where parallel cube edges remain strictly parallel without foreshortening (ideal for engineering/CAD), while the right viewport displays a perspective projection with natural foreshortening and vanishing points (modeling real-world human vision).*
 
@@ -439,7 +466,8 @@ This folder contains various computer graphics and Python projects completed dur
 
 ### Spider-Man Animation
 
-**File:** `projects/spider-man.py`
+**Folder:** [`projects/`](projects/)  
+**Program:** [`projects/spider-man.py`](projects/spider-man.py)
 
 ### Overview
 A Python script using OpenGL to render a Spider-Man character animation. The project demonstrates character rendering, animation loops, and interactive graphics using OpenGL.
@@ -451,7 +479,7 @@ A Python script using OpenGL to render a Spider-Man character animation. The pro
 - Keyboard/mouse interaction support
 
 ### Visual Result
-![Spider-Man Animation](projects/image.png)
+<img src="projects/image.png" alt="Spider-Man Animation" width="650">
 
 *The image shows the Spider-Man character rendered with OpenGL, demonstrating character animation and rendering techniques.*
 

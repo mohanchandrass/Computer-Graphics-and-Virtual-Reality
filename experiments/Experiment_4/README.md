@@ -41,7 +41,7 @@ T(tx, ty) = [[1, 0, tx],
 - Matrix multiplication is non-commutative (`T x R x S != S x R x T`), meaning transformations are evaluated right-to-left.
 
 ## Visual Result
-![Experiment 4 - Composite 2D Transformations](image.png)
+<img src="image.png" alt="Experiment 4 - Composite 2D Transformations" width="650">
 
 *The image displays the original triangle (gray), the composite transformed result (red), and the individual transformation matrices alongside the computed 3x3 composite matrix.*
 

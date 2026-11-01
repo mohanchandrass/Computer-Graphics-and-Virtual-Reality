@@ -46,7 +46,7 @@ Using vector projection, the mirror reflection vector $\vec{R}$ is calculated as
 $$\vec{R} = 2(\vec{N} \cdot \vec{L})\vec{N} - \vec{L}$$
 
 ## Visual Result
-![Experiment 7 - Phong Illumination Model](image.png)
+<img src="image.png" alt="Experiment 7 - Phong Illumination Model" width="650">
 
 *The image displays a comprehensive four-panel decomposition of the Phong illumination model applied to a 3D sphere: Panel 1 shows the uniform Ambient component ($I_{amb}$), Panel 2 displays the Lambertian Diffuse shading ($I_{diff}$), Panel 3 isolates the glossy Specular highlight ($I_{spec}$), and Panel 4 combines all three into the complete photorealistic Phong illumination model.*
 

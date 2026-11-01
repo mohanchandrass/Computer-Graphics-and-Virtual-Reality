@@ -43,7 +43,7 @@ $$\text{FragColor} = \text{vec4}(\text{Color}(t), 1.0)$$
   - Total Stride: `6 * sizeof(float)`.
 
 ## Visual Result
-![Experiment 8 - OpenGL Vertex and Fragment Shaders](image.png)
+<img src="image.png" alt="Experiment 8 - OpenGL Vertex and Fragment Shaders" width="650">
 
 *The image shows the modern OpenGL 3.3 programmable pipeline in action: an animated, smoothly color-interpolated RGB triangle rendered using custom GLSL vertex and fragment shaders with per-vertex color attributes, GPU buffer management (VAO/VBO), and dynamic rotation uniforms.*
 

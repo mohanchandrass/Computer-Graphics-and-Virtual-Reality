@@ -26,7 +26,7 @@ This experiment implements two classic line drawing algorithms in OpenGL:
 - **Plot points** at `(x1, y1)` iteratively until reaching `(x2, y2)`
 
 ## Visual Result
-![Experiment 1 - DDA and Bresenham Line Drawing](image.png)
+<img src="image.png" alt="Experiment 1 - DDA and Bresenham Line Drawing" width="650">
 
 *The image shows a red line drawn using DDA algorithm and a green line drawn using Bresenham algorithm between the points (50, 100) to (500, 450) and (50, 500) to (500, 150) respectively.*
 

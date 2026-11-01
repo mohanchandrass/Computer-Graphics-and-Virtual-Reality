@@ -22,7 +22,7 @@ This experiment implements the **Midpoint Circle Algorithm**, an efficient metho
 The algorithm exploits the 8-way symmetry of circles, so only one octant needs to be calculated, and the rest are derived by symmetry.
 
 ## Visual Result
-![Experiment 2 - Midpoint Circle Drawing](image.png)
+<img src="image.png" alt="Experiment 2 - Midpoint Circle Drawing" width="650">
 
 *The image shows a green circle centered at (300, 300) with radius 150, drawn using the midpoint circle algorithm.*
 

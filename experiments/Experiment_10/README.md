@@ -64,7 +64,7 @@ $$y_s = y_v + \frac{y_{\text{ndc}} + 1}{2} \cdot h_v$$
 - **Right Viewport:** $x_v = W/2, y_v = 0, w_v = W/2, h_v = H$ (Perspective)
 
 ## Visual Result
-![Experiment 10 - 3D Viewing Pipeline](image.png)
+<img src="image.png" alt="Experiment 10 - 3D Viewing Pipeline" width="650">
 
 *The image demonstrates the complete 3D viewing pipeline in a side-by-side comparison: the left viewport displays an orthographic projection where parallel cube edges remain strictly parallel without foreshortening (ideal for engineering/CAD), while the right viewport displays a perspective projection with natural foreshortening and vanishing points (modeling real-world human vision).*
 

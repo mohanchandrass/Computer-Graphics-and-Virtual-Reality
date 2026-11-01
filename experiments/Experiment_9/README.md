@@ -52,7 +52,7 @@ The implementation directly mirrors the component-based architecture of Unity 3D
 - **Canvas / HUD (`GameHUD.cs`):** Real-time UI displaying collected items count and objective status.
 
 ## Visual Result
-![Experiment 9 - Simple Interactive 3D Scene](image.png)
+<img src="image.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
 
 *The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 

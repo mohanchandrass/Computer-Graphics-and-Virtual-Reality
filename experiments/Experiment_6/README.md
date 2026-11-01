@@ -43,7 +43,7 @@ The implementation features a side-by-side viewport comparison:
 - **Right Viewport (Depth Test Enabled):** Activates hardware Z-buffering with `GL_LESS`. The closer red triangle ($Z = 0.5$) consistently stays in front of the green ($Z = -0.2$) and blue ($Z = -0.6$) triangles, independent of drawing order.
 
 ## Visual Result
-![Experiment 6 - Z-Buffer Algorithm for Hidden Surface Removal](image.png)
+<img src="image.png" alt="Experiment 6 - Z-Buffer Algorithm for Hidden Surface Removal" width="650">
 
 *The image displays a side-by-side comparison: the left viewport shows incorrect visibility when depth testing is disabled (later-drawn green and blue triangles incorrectly overwrite the red triangle), while the right viewport demonstrates correct hidden surface removal using the Z-buffer algorithm, preserving the closer red triangle in front.*
 

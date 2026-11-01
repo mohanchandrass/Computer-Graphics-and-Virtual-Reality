@@ -31,7 +31,7 @@ The 2D space is divided into 9 regions defined by a 4-bit code `[TOP, BOTTOM, RI
 - `Y_MIN = 100`, `Y_MAX = 400`
 
 ## Visual Result
-![Experiment 5 - Cohen-Sutherland Line Clipping](image.png)
+<img src="image.png" alt="Experiment 5 - Cohen-Sutherland Line Clipping" width="650">
 
 *The image shows a side-by-side comparison: the left panel displays the original test lines inside/outside the blue clipping window, the middle panel shows only the accepted and clipped line segments in green, and the right panel details the 4-bit region codes and step-by-step clipping algorithm logic.*
 

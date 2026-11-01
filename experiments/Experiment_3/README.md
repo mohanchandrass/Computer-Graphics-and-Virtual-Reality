@@ -57,7 +57,7 @@ Sh(shx, shy) = [[1, shx, 0],
 - Original triangle displayed in gray, transformed triangles in various colors
 
 ## Visual Result
-![Experiment 3 - 2D Transformations](image.png)
+<img src="image.png" alt="Experiment 3 - 2D Transformations" width="650">
 
 *The image displays the original triangle (gray) and its transformed versions under translation, rotation (45°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
 
