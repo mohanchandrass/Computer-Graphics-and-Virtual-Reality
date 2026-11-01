@@ -1,4 +1,4 @@
-# Computer Graphics Experiments
+# Computer Graphics and Virtual Reality
 
 **Name:** MOHAN CHANDRA S S  
 **USN:** 1RVU23CSE282  
