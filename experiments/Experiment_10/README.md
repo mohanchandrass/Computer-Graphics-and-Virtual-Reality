@@ -89,3 +89,47 @@ python exp10.py --headless
 - GLFW (`pip install glfw`)
 - Pillow (`pip install pillow`)
 
+
+---
+
+## Unity Implementation
+
+A Unity 2022.3 LTS C# implementation of the complete 3D Viewing Pipeline is included in `projects/New Unity Project/`.
+
+### Scripts (in `Assets/Scripts/Lab10/`)
+
+| Script | Purpose |
+|---|---|
+| `Lab10ViewingPipeline.cs` | Runtime camera builder — creates left (Orthographic) and right (Perspective FOV 45) cameras via `Camera.rect` viewport splitting |
+| `Lab10RotatingCube.cs` | Rotates the coloured multi-face cube on all three axes continuously |
+
+### Editor Auto-Setup (in `Assets/Editor/Lab10/`)
+
+`Lab10SceneSetup.cs` — run **Lab > Setup Lab 10 Scene** from the Unity menu bar.
+Creates: a 6-face coloured rotating cube, dual split-screen cameras, UI labels, a centre divider line, and ambient lighting.
+
+### How to Open & Run
+
+1. Open **Unity Hub** and add the project at `projects/New Unity Project/`
+2. Open the project in **Unity 2022.3 LTS**
+3. Open an **empty scene** (File > New Scene)
+4. In the menu bar select **Lab > Setup Lab 10 Scene**
+5. Press **Play**
+   - **Left half** — Orthographic projection: parallel edges stay parallel, no foreshortening
+   - **Right half** — Perspective projection (FOV 45): realistic depth foreshortening
+
+### Pipeline Stages Demonstrated in Unity
+
+```
+[Object Coordinates]  ->  Model Matrix (rotation on all axes)
+       |
+[World Coordinates]   ->  View Matrix (camera look-at)
+       |
+[Eye Coordinates]     ->  Projection Matrix (Ortho left | Perspective right)
+       |
+[Clip Coordinates]    ->  Perspective Division (/w)
+       |
+[NDC -1..1]           ->  Viewport Matrix (Camera.rect splits screen 50/50)
+       |
+[Screen Pixels]
+```

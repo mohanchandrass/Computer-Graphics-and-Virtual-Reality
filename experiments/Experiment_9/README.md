@@ -82,3 +82,38 @@ python exp9.py --headless
 - GLFW (`pip install glfw`)
 - Pillow (`pip install pillow`)
 
+
+---
+
+## Unity Implementation
+
+A full Unity 2022.3 LTS C# implementation is also included inside the shared Unity project at `projects/New Unity Project/`.
+
+### Scripts (in `Assets/Scripts/Lab9/`)
+
+| Script | Purpose |
+|---|---|
+| `PlayerController.cs` | CharacterController-based WASD / arrow-key movement, Space jump, R reset, Esc quit |
+| `CameraFollow.cs` | Smooth third-person camera — `Vector3.Lerp` orbit behind & above player |
+| `Collectible.cs` | `OnTriggerEnter` pickup; harmonic bob + Y-axis spin animation |
+| `RotatingObject.cs` | Continuous Y-axis rotation for obstacle cubes |
+| `GameHUD.cs` | Singleton UI — shows "Collected X/5" counter and "You Win!" overlay |
+
+### Editor Auto-Setup (in `Assets/Editor/Lab9/`)
+
+`LabSceneAutoSetup.cs` — run **Lab ? Setup Lab 9 Scene** from the Unity menu bar.
+This one-click builder creates the entire scene: ground, player, camera, 4 rotating obstacles, 5 collectible gems, and the HUD canvas.
+
+### How to Open & Run
+
+1. Open **Unity Hub** and add the project at `projects/New Unity Project/`
+2. Open the project in **Unity 2022.3 LTS**
+3. Open an **empty scene** (File > New Scene)
+4. In the menu bar select **Lab > Setup Lab 9 Scene**
+5. Press **Play** — use WASD / Space to navigate and collect all 5 gems
+
+### Unity Controls
+- **`W / A / S / D`** or **Arrow Keys** — Move and turn
+- **`Space`** — Jump
+- **`R`** — Reset player and respawn collectibles
+- **`Esc`** — Quit (stops Play mode in Editor)
