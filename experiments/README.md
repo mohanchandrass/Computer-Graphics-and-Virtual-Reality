@@ -1,6 +1,9 @@
 # Experiments
 
-This folder contains five computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
+**Name:** MOHAN CHANDRA S S  
+**USN:** 1RVU23CSE282  
+
+This folder contains ten computer graphics experiments implemented in Python using OpenGL. Each experiment demonstrates a fundamental graphics algorithm and produces a visual result.
 
 ---
 
@@ -196,31 +199,231 @@ The 2D space is divided into 9 regions defined by 4-bit region codes `[TOP, BOTT
 
 ---
 
+## Experiment 6: Z-Buffer Algorithm for Hidden Surface Removal
+
+**File:** `Experiment_6/exp6.py`
+
+### Overview
+This experiment implements the **Z-buffer (Depth-Buffer) Algorithm**, a foundational image-space approach for hidden surface removal in 3D computer graphics. By maintaining a 2D depth buffer alongside the color framebuffer, the algorithm ensures that surfaces closest to the viewer are correctly drawn, while occluded surfaces are discarded, regardless of polygon submission order.
+
+### Formulas and Operations
+
+#### Depth Calculation & Linear Recurrence
+For a polygon planar surface $Ax + By + Cz + D = 0$, depth $z$ at pixel $(x, y)$ is given by:
+$$z = \frac{-Ax - By - D}{C}$$
+
+When stepping along a scanline ($\Delta x = 1$):
+$$z' = z - \frac{A}{C}$$
+
+#### Z-Buffer Decision Logic
+For each projected fragment at $(x, y)$ with depth $z$:
+- **Condition:** $\text{If } z < Z_{\text{buffer}}(x, y)$
+  - $Z_{\text{buffer}}(x, y) \leftarrow z$
+  - $\text{ColorBuffer}(x, y) \leftarrow \text{PolygonColor}$
+- Otherwise, the fragment is discarded as occluded.
+
+#### Comparative Demonstration
+- **Left Viewport (Depth Test Disabled):** Demonstrates the Painter's algorithm failure where later-drawn green ($Z = -0.2$) and blue ($Z = -0.6$) triangles incorrectly overwrite the closer red triangle ($Z = 0.5$).
+- **Right Viewport (Depth Test Enabled):** Hardware Z-buffering with `GL_LESS` resolves visibility per-pixel, correctly keeping the closer red triangle in front.
+
+### Visual Result
+![Experiment 6 - Z-Buffer Algorithm for Hidden Surface Removal](Experiment_6/image.png)
+
+*The image displays a side-by-side comparison: the left viewport shows incorrect visibility when depth testing is disabled (later-drawn green and blue triangles incorrectly overwrite the red triangle), while the right viewport demonstrates correct hidden surface removal using the Z-buffer algorithm, preserving the closer red triangle in front.*
+
+---
+
+## Experiment 7: Phong Illumination Model for a 3D Object
+
+**File:** `Experiment_7/exp7.py`
+
+### Overview
+This experiment implements the **Phong Illumination Model**, a standard local shading formulation that evaluates the total reflected light intensity on 3D surfaces as the sum of ambient, diffuse (Lambertian), and specular components.
+
+### Formulas and Operations
+
+#### Total Illumination Formula
+$$I = I_{\text{ambient}} + I_{\text{diffuse}} + I_{\text{specular}}$$
+$$I = k_a I_a + k_d (\vec{N} \cdot \vec{L}) I_d + k_s (\vec{R} \cdot \vec{V})^\alpha I_s$$
+
+#### Vectors and Terms
+- **Surface Normal ($\vec{N}$):** Unit normal vector at the surface point (for a unit sphere, $\vec{N} = (x, y, z)$).
+- **Light Vector ($\vec{L}$):** Unit vector directed from the surface point towards the light source.
+- **Viewer Vector ($\vec{V}$):** Unit vector directed towards the camera $(0, 0, 1)$.
+- **Reflection Vector ($\vec{R}$):** Direction of perfect specular reflection:
+  $$\vec{R} = 2(\vec{N} \cdot \vec{L})\vec{N} - \vec{L}$$
+- **Shininess Exponent ($\alpha$):** Exponent controlling the sharpness and spread of the specular highlight ($\alpha = 32$).
+
+#### Decomposition
+The program splits the illumination model into four distinct panels:
+1. **Ambient Component ($I_{\text{ambient}}$):** Uniform baseline environment illumination ($k_a I_a$).
+2. **Diffuse Component ($I_{\text{diffuse}}$):** Lambertian scattering proportional to $\max(0, \vec{N} \cdot \vec{L})$.
+3. **Specular Component ($I_{\text{specular}}$):** Mirror highlight proportional to $\max(0, \vec{R} \cdot \vec{V})^\alpha$.
+4. **Full Phong Model ($I$):** Complete combined illumination producing realistic 3D appearance.
+
+### Visual Result
+![Experiment 7 - Phong Illumination Model](Experiment_7/image.png)
+
+*The image displays a comprehensive four-panel decomposition of the Phong illumination model applied to a 3D sphere: Panel 1 shows the uniform Ambient component ($I_{amb}$), Panel 2 displays the Lambertian Diffuse shading ($I_{diff}$), Panel 3 isolates the glossy Specular highlight ($I_{spec}$), and Panel 4 combines all three into the complete photorealistic Phong illumination model.*
+
+---
+
+## Experiment 8: OpenGL Vertex and Fragment Shaders
+
+**File:** `Experiment_8/exp8.py`
+
+### Overview
+This experiment demonstrates the **modern programmable graphics pipeline** in OpenGL using GLSL (OpenGL Shading Language) version 3.3 Core Profile. It showcases GPU buffer management with VAO/VBOs, vertex position transformation via a vertex shader, and per-vertex color interpolation modulated by a fragment shader.
+
+### Formulas and Operations
+
+#### Pipeline Architecture
+```
+[Vertex Attributes (Position, Color)] -> [VAO/VBO] -> [Vertex Shader] -> [Rasterizer] -> [Fragment Shader] -> [Framebuffer]
+```
+
+#### 1. Vertex Shader (GLSL 330 Core)
+Transforms vertex positions using a 2D rotation matrix driven by the uniform variable `angle` ($\theta$):
+$$\begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}$$
+$$\text{gl\_Position} = \begin{bmatrix} x' \\ y' \\ z \\ 1.0 \end{bmatrix}, \quad \text{vertexColor} = \text{aColor}$$
+
+#### 2. Fragment Shader (GLSL 330 Core)
+Interpolates vertex colors smoothly across the triangle using barycentric coordinates and applies a continuous sine-wave time pulsation:
+$$\text{pulse}(t) = 0.5 + 0.5 \sin(2.5 \cdot t)$$
+$$\text{FragColor} = \text{vec4}(\text{vertexColor} \times (0.75 + 0.25 \cdot \text{pulse}(t)), 1.0)$$
+
+#### 3. Buffer Objects
+- **VBO (Vertex Buffer Object):** Interleaved array containing 3D vertex positions and RGB colors.
+- **VAO (Vertex Array Object):** Configures and enables vertex attribute pointers 0 (Position) and 1 (Color).
+
+### Visual Result
+![Experiment 8 - OpenGL Vertex and Fragment Shaders](Experiment_8/image.png)
+
+*The image shows the modern OpenGL 3.3 programmable pipeline in action: an animated, smoothly color-interpolated RGB triangle rendered using custom GLSL vertex and fragment shaders with per-vertex color attributes, GPU buffer management (VAO/VBO), and dynamic rotation uniforms.*
+
+---
+
+## Experiment 9: Simple Interactive 3D Scene
+
+**File:** `Experiment_9/exp9.py`
+
+### Overview
+This experiment demonstrates the construction of a **simple interactive 3D scene**, incorporating game engine concepts (as seen in Unity) directly in Python using OpenGL. The scene features a 3D arena floor grid, a controllable player character, third-person camera tracking, 3D obstacle blocks, rotating animated collectible gems, collision detection, and a real-time Heads-Up Display (HUD).
+
+### Formulas and Operations
+
+#### 1. Player Kinematics & Jump Physics
+- **Horizontal Displacement:**
+  $$\Delta x = -v \cdot \Delta t \cdot \sin(\theta), \quad \Delta z = v \cdot \Delta t \cdot \cos(\theta)$$
+- **Euler Gravity & Jump Simulation:**
+  $$v_y(t + \Delta t) = v_y(t) - g \cdot \Delta t, \quad y(t + \Delta t) = y(t) + v_y(t) \cdot \Delta t$$
+  $$\text{Jump Impulse: } v_y = 8.5 \text{ m/s when grounded}$$
+
+#### 2. Third-Person Following Camera Pipeline
+Calculates dynamic camera position $\vec{C}$ following player position $\vec{P}$ at orientation angle $\theta$:
+$$C_x = P_x - d_{\text{cam}} \cdot \sin(\theta), \quad C_z = P_z + d_{\text{cam}} \cdot \cos(\theta), \quad C_y = P_y + h_{\text{cam}}$$
+View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6, player_z, 0, 1, 0)`.
+
+#### 3. Continuous Gem Rotation & Proximity Collision
+- **Rotation:** $\phi(t) = \omega \cdot t$ ($\omega = 75^\circ/\text{s}$)
+- **Harmonic Oscillation:** $y_{\text{gem}}(t) = y_0 + A \sin(\omega_{\text{bob}} t)$
+- **Pickup Radius:** Gathered when Euclidean distance $\sqrt{(P_x - C_x)^2 + (P_z - C_z)^2} < 1.3\text{m}$.
+
+### Visual Result
+![Experiment 9 - Simple Interactive 3D Scene](Experiment_9/image.png)
+
+*The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
+
+---
+
+## Experiment 10: 3D Viewing Pipeline, Projection and Viewport Mapping
+
+**File:** `Experiment_10/exp10.py`
+
+### Overview
+This experiment implements the complete **3D Viewing Pipeline**, demonstrating how 3D geometric models are converted into a 2D screen image through sequential coordinate transformations. It highlights the difference between **Orthographic Projection** (engineering / CAD perspective) and **Perspective Projection** (natural human vision) using side-by-side viewports displaying an animated multi-colored 3D cube.
+
+### Formulas and Operations
+
+#### Viewing Pipeline Transformation Sequence
+```
+[Object Coordinates] -> [World Coordinates] -> [Eye / View Coordinates] -> [Clip Coordinates] -> [NDC] -> [Screen Viewports]
+```
+
+#### 1. View Matrix Transformation (`gluLookAt`)
+Transforms world coordinates to camera coordinates with eye at $(4, 3, 6)$ and target at $(0, 0, 0)$:
+$$M_{\text{view}} = \begin{bmatrix} \vec{x}_c & -\vec{x}_c \cdot \vec{E} \\ \vec{y}_c & -\vec{y}_c \cdot \vec{E} \\ \vec{z}_c & -\vec{z}_c \cdot \vec{E} \\ \mathbf{0} & 1 \end{bmatrix}$$
+
+#### 2. Projection Matrices ($M_{\text{proj}}$)
+- **Orthographic Projection (`glOrtho`):** Parallel projectors maintain object proportions and parallel lines:
+  $$M_{\text{ortho}} = \begin{bmatrix} \frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\ 0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\ 0 & 0 & -\frac{2}{f-n} & -\frac{f+n}{f-n} \\ 0 & 0 & 0 & 1 \end{bmatrix}$$
+- **Perspective Projection (`gluPerspective`):** Projectors converge at center of projection, yielding depth foreshortening:
+  $$M_{\text{persp}} = \begin{bmatrix} \frac{\cot(\text{fovy}/2)}{\text{aspect}} & 0 & 0 & 0 \\ 0 & \cot(\text{fovy}/2) & 0 & 0 \\ 0 & 0 & -\frac{f+n}{f-n} & -\frac{2fn}{f-n} \\ 0 & 0 & -1 & 0 \end{bmatrix}$$
+
+#### 3. Viewport Mapping
+Transforms Normalized Device Coordinates (NDC) in $[-1, 1]^2$ to physical pixel coordinates:
+$$x_s = x_v + \frac{x_{\text{ndc}} + 1}{2} \cdot w_v, \quad y_s = y_v + \frac{y_{\text{ndc}} + 1}{2} \cdot h_v$$
+
+### Visual Result
+![Experiment 10 - 3D Viewing Pipeline](Experiment_10/image.png)
+
+*The image demonstrates the complete 3D viewing pipeline in a side-by-side comparison: the left viewport displays an orthographic projection where parallel cube edges remain strictly parallel without foreshortening (ideal for engineering/CAD), while the right viewport displays a perspective projection with natural foreshortening and vanishing points (modeling real-world human vision).*
+
+---
+
 ## How to Run
 
 Each experiment can be run independently using Python with OpenGL support:
 
 ```bash
-# Experiment 1
+# Experiment 1: DDA and Bresenham Line Drawing
 python Experiment_1/exp1.py
 
-# Experiment 2
+# Experiment 2: Midpoint Circle Drawing
 python Experiment_2/exp2.py
 
-# Experiment 3
+# Experiment 3: 2D Transformations
 python Experiment_3/exp3.py
 
-# Experiment 4
+# Experiment 4: Composite 2D Transformations
 python Experiment_4/exp4.py
 
-# Experiment 5
+# Experiment 5: Cohen-Sutherland Line Clipping
 python Experiment_5/exp5.py
+
+# Experiment 6: Z-Buffer Hidden Surface Removal
+python Experiment_6/exp6.py
+
+# Experiment 7: Phong Illumination Model
+python Experiment_7/exp7.py
+
+# Experiment 8: Vertex and Fragment Shaders
+python Experiment_8/exp8.py
+
+# Experiment 9: Simple Interactive 3D Scene
+python Experiment_9/exp9.py
+
+# Experiment 10: 3D Viewing Pipeline
+python Experiment_10/exp10.py
 ```
 
-**Requirements:**
+### Headless Screenshot Capture
+Experiments 6 through 10 support the `--headless` flag to generate and save output screenshots without opening a persistent display window:
+```bash
+python Experiment_6/exp6.py --headless
+python Experiment_7/exp7.py --headless
+python Experiment_8/exp8.py --headless
+python Experiment_9/exp9.py --headless
+python Experiment_10/exp10.py --headless
+```
+
+### Requirements
 - Python 3.x
 - PyOpenGL
 - PyGLUT
+- GLFW (`pip install glfw`)
+- NumPy (`pip install numpy`)
+- Pillow (`pip install pillow`)
 
 ## License
 
