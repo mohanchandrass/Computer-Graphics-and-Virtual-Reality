@@ -21,3 +21,4 @@ Shader "CGVR/Lab10/FaceColors"
     }
     Fallback "Sprites/Default"
 }
+

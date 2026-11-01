@@ -20,3 +20,4 @@ public static class Lab10SceneMenu
             Debug.LogWarning("[Lab 10] CGVR/Lab10/FaceColors shader not loaded yet. Unity will compile it shortly.");
     }
 }
+

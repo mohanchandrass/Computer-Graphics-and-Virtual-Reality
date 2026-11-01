@@ -396,6 +396,10 @@ Transforms Normalized Device Coordinates (NDC) in $[-1, 1]^2$ to physical pixel 
 $$x_s = x_v + \frac{x_{\text{ndc}} + 1}{2} \cdot w_v, \quad y_s = y_v + \frac{y_{\text{ndc}} + 1}{2} \cdot h_v$$
 
 ### Visual Result
+<img src="experiments/Experiment_10/LAB10.gif" alt="Experiment 10 - 3D Viewing Pipeline Animation" width="650">
+
+> **Live Demo (GIF):** [LAB10.gif](experiments/Experiment_10/LAB10.gif) — Animated recording of the dual-viewport 3D viewing pipeline demonstrating real-time comparison of Orthographic vs Perspective projection.
+
 <img src="experiments/Experiment_10/image.png" alt="Experiment 10 - 3D Viewing Pipeline" width="650">
 
 *The image demonstrates the complete 3D viewing pipeline in a side-by-side comparison: the left viewport displays an orthographic projection where parallel cube edges remain strictly parallel without foreshortening (ideal for engineering/CAD), while the right viewport displays a perspective projection with natural foreshortening and vanishing points (modeling real-world human vision).*

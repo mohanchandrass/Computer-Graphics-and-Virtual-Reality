@@ -274,3 +274,4 @@ public sealed class Lab10ViewingPipelineDemo : MonoBehaviour
         if (cubeMesh != null) Destroy(cubeMesh);
     }
 }
+

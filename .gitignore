@@ -9,6 +9,12 @@ __pycache__/
 notes/
 notes
 
+# Case Study & Project Reports (local only)
+ROOMSPACE_*.md
+projects/CaseStudy3_RoomSpace/
+projects/*.docx
+*.docx
+
 # Unity generated folders (do NOT commit these)
 [Ll]ibrary/
 [Tt]emp/
