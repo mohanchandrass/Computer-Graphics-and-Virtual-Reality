@@ -3,65 +3,82 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Experiment 9 — Auto-Bootstrap
-/// Automatically builds the entire Lab 9 scene at runtime when you press Play.
-/// No setup menu needed — just open the project and press Play.
-/// Uses [RuntimeInitializeOnLoadMethod] so it fires even in an empty scene.
+/// Builds the full Lab 9 scene when Play is pressed — even on an empty scene.
+/// AfterSceneLoad is used so all built-in systems are fully initialised first.
 /// </summary>
 public class Lab9Bootstrap
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Bootstrap()
     {
-        Debug.Log("[Lab 9] Auto-bootstrapping scene...");
+        // Don't double-build if the scene was already set up via the Editor menu
+        if (GameObject.Find("Player") != null) return;
+
+        Debug.Log("[Lab 9] Auto-bootstrapping interactive 3D scene...");
 
         // ── Lighting ───────────────────────────────────────────────────────
         GameObject lightGO = new GameObject("Directional Light");
         Light light = lightGO.AddComponent<Light>();
-        light.type = LightType.Directional;
+        light.type      = LightType.Directional;
         light.intensity = 1.2f;
         lightGO.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
 
-        // ── Ground plane ───────────────────────────────────────────────────
+        // ── Ground ─────────────────────────────────────────────────────────
         GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
         ground.name = "Ground";
         ground.transform.localScale = new Vector3(3f, 1f, 3f);
         ApplyColor(ground, new Color(0.25f, 0.45f, 0.25f));
 
-        // ── Player capsule ─────────────────────────────────────────────────
-        GameObject player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        player.name = "Player";
+        // ── Player ─────────────────────────────────────────────────────────
+        // Build as: empty root (CharacterController) + child capsule (mesh/visuals)
+        // This avoids the CapsuleCollider vs CharacterController conflict entirely.
+        GameObject player = new GameObject("Player");
         player.tag = "Player";
         player.transform.position = new Vector3(0f, 1f, 0f);
-        ApplyColor(player, new Color(0.2f, 0.5f, 1f));
 
-        // CharacterController replaces the CapsuleCollider
-        Object.Destroy(player.GetComponent<CapsuleCollider>());
         CharacterController cc = player.AddComponent<CharacterController>();
         cc.height = 2f;
         cc.radius = 0.5f;
+        cc.center = new Vector3(0f, 0f, 0f);
+
+        // Visual child: capsule mesh without its own collider
+        GameObject capsuleVisual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        capsuleVisual.name = "PlayerMesh";
+        Object.Destroy(capsuleVisual.GetComponent<CapsuleCollider>()); // remove visual collider
+        capsuleVisual.transform.SetParent(player.transform);
+        capsuleVisual.transform.localPosition = Vector3.zero;
+        capsuleVisual.transform.localRotation = Quaternion.identity;
+        ApplyColor(capsuleVisual, new Color(0.2f, 0.5f, 1f));
 
         PlayerController pc = player.AddComponent<PlayerController>();
         pc.spawnPosition = new Vector3(0f, 1f, 0f);
+        pc.moveSpeed  = 6f;
+        pc.turnSpeed  = 120f;
+        pc.jumpSpeed  = 8.5f;
+        pc.gravity    = 24f;
 
         // ── Camera ─────────────────────────────────────────────────────────
-        // Check if a Main Camera already exists
+        // Reuse existing Main Camera if present
         GameObject camGO = GameObject.FindWithTag("MainCamera");
         if (camGO == null)
         {
             camGO = new GameObject("Main Camera");
             camGO.tag = "MainCamera";
             camGO.AddComponent<Camera>();
-            camGO.AddComponent<AudioListener>();
         }
-        camGO.transform.position = new Vector3(0f, 4f, -7f);
+        // Ensure exactly one AudioListener
+        if (camGO.GetComponent<AudioListener>() == null)
+            camGO.AddComponent<AudioListener>();
+
+        camGO.transform.position = new Vector3(0f, 5f, -8f);
         camGO.transform.LookAt(player.transform);
 
         CameraFollow cf = camGO.GetComponent<CameraFollow>();
         if (cf == null) cf = camGO.AddComponent<CameraFollow>();
-        cf.target = player.transform;
-        cf.distance = 6f;
-        cf.height = 3.2f;
-        cf.positionLerpSpeed = 0.12f;
+        cf.target             = player.transform;
+        cf.distance           = 6f;
+        cf.height             = 3.2f;
+        cf.positionLerpSpeed  = 0.12f;
 
         // ── Obstacles ──────────────────────────────────────────────────────
         Vector3[] obsPos = {
@@ -80,7 +97,7 @@ public class Lab9Bootstrap
         {
             GameObject obs = GameObject.CreatePrimitive(PrimitiveType.Cube);
             obs.name = "Obstacle_" + (i + 1);
-            obs.transform.position = obsPos[i];
+            obs.transform.position   = obsPos[i];
             obs.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             ApplyColor(obs, obsColors[i]);
             obs.AddComponent<RotatingObject>().rotateSpeed = 30f + i * 10f;
@@ -98,7 +115,7 @@ public class Lab9Bootstrap
         {
             GameObject gem = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             gem.name = "Collectible_" + (i + 1);
-            gem.transform.position = gemPos[i];
+            gem.transform.position   = gemPos[i];
             gem.transform.localScale = Vector3.one * 0.5f;
             ApplyColor(gem, new Color(1f, 0.85f, 0.1f));
             gem.GetComponent<SphereCollider>().isTrigger = true;
@@ -135,13 +152,13 @@ public class Lab9Bootstrap
         GameObject hudGO = new GameObject("GameHUD");
         GameHUD hud = hudGO.AddComponent<GameHUD>();
         hud.collectibleCountText = countText;
-        hud.winText = winText;
-        hud.totalCollectibles = 5;
+        hud.winText              = winText;
+        hud.totalCollectibles    = 5;
 
-        Debug.Log("[Lab 9] Scene ready! Use WASD to move, Space to jump, R to reset.");
+        Debug.Log("[Lab 9] Scene ready! WASD = move, Space = jump, R = reset, Esc = quit.");
     }
 
-    // ── Static helpers ─────────────────────────────────────────────────────
+    // ── Helpers ────────────────────────────────────────────────────────────
     static void ApplyColor(GameObject go, Color color)
     {
         Renderer r = go.GetComponent<Renderer>();
@@ -151,27 +168,27 @@ public class Lab9Bootstrap
         r.material = mat;
     }
 
-    static Text MakeText(GameObject canvasGO, string name, string content,
+    static Text MakeText(GameObject canvasGO, string objName, string content,
         int fontSize, Color color, FontStyle style,
         Vector2 anchorMin, Vector2 anchorMax,
         Vector2 anchoredPos, Vector2 size,
         TextAnchor alignment = TextAnchor.UpperLeft)
     {
-        GameObject go = new GameObject(name);
+        GameObject go = new GameObject(objName);
         go.transform.SetParent(canvasGO.transform, false);
-        Text t = go.AddComponent<Text>();
-        t.font      = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        t.text      = content;
-        t.fontSize  = fontSize;
-        t.color     = color;
-        t.fontStyle = style;
-        t.alignment = alignment;
-        RectTransform rt = go.GetComponent<RectTransform>();
-        rt.anchorMin = anchorMin;
-        rt.anchorMax = anchorMax;
-        rt.pivot     = anchorMin;
-        rt.anchoredPosition = anchoredPos;
-        rt.sizeDelta = size;
+        Text t        = go.AddComponent<Text>();
+        t.font        = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        t.text        = content;
+        t.fontSize    = fontSize;
+        t.color       = color;
+        t.fontStyle   = style;
+        t.alignment   = alignment;
+        RectTransform rt       = go.GetComponent<RectTransform>();
+        rt.anchorMin           = anchorMin;
+        rt.anchorMax           = anchorMax;
+        rt.pivot               = anchorMin;
+        rt.anchoredPosition    = anchoredPos;
+        rt.sizeDelta           = size;
         return t;
     }
 }
