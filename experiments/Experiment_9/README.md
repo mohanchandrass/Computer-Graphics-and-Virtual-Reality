@@ -1,4 +1,4 @@
-# Experiment 9: Simple Interactive 3D Scene
+﻿# Experiment 9: Simple Interactive 3D Scene
 
 **File:** `exp9.py`  
 **Unity Project:** `unity_project/`
@@ -53,9 +53,11 @@ The implementation directly mirrors the component-based architecture of Unity 3D
 - **Canvas / HUD (`GameHUD.cs`):** Real-time UI displaying collected items count and objective status.
 
 ## Visual Result
-<img src="image.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
+<img src="image copy.png" alt="Experiment 9 - Unity Interactive 3D Scene" width="650">
 
-*The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
+> **Live Demo (GIF):** [LAB9.gif](LAB9.gif) — Full gameplay recording of the Unity scene in action.
+
+*The screenshot shows the Unity 3D interactive scene: coloured obstacle cubes, golden collectible spheres on a green ground plane, and the HUD overlay.*
 
 ---
 
@@ -96,14 +98,14 @@ A complete standalone Unity 2022.3 LTS project is included in the `unity_project
 | Script | Purpose |
 |---|---|
 | `PlayerController.cs` | CharacterController-based WASD / arrow-key movement, Space jump, R reset, Esc quit |
-| `CameraFollow.cs` | Smooth third-person camera — `Vector3.Lerp` orbit behind & above player |
+| `CameraFollow.cs` | Smooth third-person camera â€” `Vector3.Lerp` orbit behind & above player |
 | `Collectible.cs` | `OnTriggerEnter` pickup; harmonic bob + Y-axis spin animation |
 | `RotatingObject.cs` | Continuous Y-axis rotation for obstacle cubes |
-| `GameHUD.cs` | Singleton UI — shows "Collected X/5" counter and "You Win!" overlay |
+| `GameHUD.cs` | Singleton UI â€” shows "Collected X/5" counter and "You Win!" overlay |
 
 ### Editor Auto-Setup (in `unity_project/Assets/Editor/`)
 
-`LabSceneAutoSetup.cs` — provides the menu item **Lab > Setup Lab 9 Scene** from the Unity editor menu bar.  
+`LabSceneAutoSetup.cs` â€” provides the menu item **Lab > Setup Lab 9 Scene** from the Unity editor menu bar.  
 This one-click builder instantiates the complete environment: ground plane, player capsule with CharacterController, third-person camera with tracking script, 4 rotating obstacle cubes, 5 collectible spheres with triggers, and a full HUD canvas overlay.
 
 ### How to Open & Run in Unity
@@ -114,11 +116,11 @@ This one-click builder instantiates the complete environment: ground plane, play
 4. Open with **Unity 2022.3 LTS** (e.g. 2022.3.62f2)
 5. Create a new scene (**File > New Scene**) or use the default scene
 6. In the top menu bar, click **Lab > Setup Lab 9 Scene**
-7. Click the **Play** button (▶) to run the interactive 3D scene
+7. Click the **Play** button (â–¶) to run the interactive 3D scene
 
 ### Unity Controls
-- **`W / A / S / D`** or **Arrow Keys** — Move & turn
-- **`Space`** — Jump
-- **`R`** — Reset player & respawn collectibles
-- **`Esc`** — Stop / Quit
+- **`W / A / S / D`** or **Arrow Keys** â€” Move & turn
+- **`Space`** â€” Jump
+- **`R`** â€” Reset player & respawn collectibles
+- **`Esc`** â€” Stop / Quit
 

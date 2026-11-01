@@ -1,4 +1,4 @@
-# Experiments
+﻿# Experiments
 
 **Name:** MOHAN CHANDRA S S  
 **USN:** 1RVU23CSE282  
@@ -15,7 +15,7 @@ This folder contains ten computer graphics and virtual reality experiments imple
 | **2** | [Implement the Midpoint Circle Drawing Algorithm](#experiment-2-midpoint-circle-drawing-algorithm) | [`Experiment_2/`](Experiment_2/) | [`exp2.py`](Experiment_2/exp2.py) |
 | **3** | [Implement 2D transformations using homogeneous coordinates](#experiment-3-2d-transformations-using-homogeneous-coordinates) | [`Experiment_3/`](Experiment_3/) | [`exp3.py`](Experiment_3/exp3.py) |
 | **4** | [Implement composite transformations using matrix representation](#experiment-4-composite-2d-transformations-using-matrix-representation) | [`Experiment_4/`](Experiment_4/) | [`exp4.py`](Experiment_4/exp4.py) |
-| **5** | [Implement the Cohen–Sutherland line clipping algorithm](#experiment-5-cohen-sutherland-line-clipping-algorithm) | [`Experiment_5/`](Experiment_5/) | [`exp5.py`](Experiment_5/exp5.py) |
+| **5** | [Implement the Cohenâ€“Sutherland line clipping algorithm](#experiment-5-cohen-sutherland-line-clipping-algorithm) | [`Experiment_5/`](Experiment_5/) | [`exp5.py`](Experiment_5/exp5.py) |
 | **6** | [Implement the Z-buffer algorithm for hidden surface removal](#experiment-6-z-buffer-algorithm-for-hidden-surface-removal) | [`Experiment_6/`](Experiment_6/) | [`exp6.py`](Experiment_6/exp6.py) |
 | **7** | [Implement the Phong illumination model for a 3D object](#experiment-7-phong-illumination-model-for-a-3d-object) | [`Experiment_7/`](Experiment_7/) | [`exp7.py`](Experiment_7/exp7.py) |
 | **8** | [Develop a basic OpenGL program using vertex and fragment shaders](#experiment-8-opengl-vertex-and-fragment-shaders) | [`Experiment_8/`](Experiment_8/) | [`exp8.py`](Experiment_8/exp8.py) |
@@ -78,7 +78,7 @@ This experiment implements the **Midpoint Circle Algorithm**, an efficient metho
     - If `p < 0`: `p += 2 * x + 1` (move east only)
     - If `p >= 0`: `y -= 1` and `p += 2 * (x - y) + 1` (move southeast)
 - **Symmetry plotting:** For each calculated point `(x, y)`, all 8 symmetric points are plotted:
-  - `(xc ± x, yc ± y)` and `(xc ± y, yc ± x)`
+  - `(xc Â± x, yc Â± y)` and `(xc Â± y, yc Â± x)`
 
 #### Key Insight
 The algorithm exploits the 8-way symmetry of circles, so only one octant needs to be calculated, and the rest are derived by symmetry.
@@ -102,7 +102,7 @@ This experiment demonstrates **2D geometric transformations** using homogeneous 
 
 #### Homogeneous Coordinates
 - Points represented as `[x, y, 1]` for transformation compatibility
-- All transformations use 3×3 matrices operating on homogeneous coordinate vectors
+- All transformations use 3Ã—3 matrices operating on homogeneous coordinate vectors
 
 #### Transformation Matrices
 
@@ -116,12 +116,12 @@ T(tx, ty) = [[1, 0, tx],
 
 **2. Rotation**
 ```
-R(angle) = [[cos(θ), -sin(θ), 0],
-            [sin(θ),  cos(θ), 0],
+R(angle) = [[cos(Î¸), -sin(Î¸), 0],
+            [sin(Î¸),  cos(Î¸), 0],
             [0,       0,      1]]
 ```
 - Rotates point by `angle` degrees counterclockwise
-- Uses `θ = math.radians(angle)` to convert to radians
+- Uses `Î¸ = math.radians(angle)` to convert to radians
 
 **3. Scaling**
 ```
@@ -152,7 +152,7 @@ Sh(shx, shy) = [[1, shx, 0],
 ### Visual Result
 <img src="Experiment_3/image.png" alt="Experiment 3 - 2D Transformations" width="650">
 
-*The image displays the original triangle (gray) and its transformed versions under translation, rotation (45°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
+*The image displays the original triangle (gray) and its transformed versions under translation, rotation (45Â°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
 
 ---
 
@@ -168,7 +168,7 @@ This experiment demonstrates **composite 2D geometric transformations** using ma
 
 #### Homogeneous Coordinates & 3x3 Matrices
 - **Scaling Matrix S:** `sx = 1.5, sy = 1.5`
-- **Rotation Matrix R:** `θ = 45°` (`math.radians(45)`)
+- **Rotation Matrix R:** `Î¸ = 45Â°` (`math.radians(45)`)
 - **Translation Matrix T:** `tx = 250, ty = 120`
 
 #### Composite Matrix Formula
@@ -357,7 +357,7 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 - **Pickup Radius:** Gathered when Euclidean distance $\sqrt{(P_x - C_x)^2 + (P_z - C_z)^2} < 1.3\text{m}$.
 
 ### Visual Result
-<img src="Experiment_9/image.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
+<img src="Experiment_9/image copy.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
 
 *The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 

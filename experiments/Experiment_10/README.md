@@ -96,45 +96,50 @@ python exp10.py --headless
 
 ## Unity Implementation
 
-A complete standalone Unity 2022.3 LTS project implementing the 3D Viewing Pipeline is included in the `unity_project/` directory.
+A complete standalone Unity C# project implementing the 3D Viewing Pipeline is included in the `unity_project/` directory (matching the CGVR reference lab architecture).
 
-### Scripts (in `unity_project/Assets/Scripts/`)
+### Components & Structure
 
-| Script | Purpose |
-|---|---|
-| `Lab10ViewingPipeline.cs` | Runtime camera builder — creates left (Orthographic) and right (Perspective FOV 45°) cameras via `Camera.rect` viewport splitting |
-| `Lab10RotatingCube.cs` | Rotates the coloured multi-face cube on all three axes continuously |
+| File | Type | Purpose |
+|---|---|---|
+| `Assets/Scripts/Lab10ViewingPipelineDemo.cs` | C# Script | Procedural 6-colour cube mesh, edge outlines (`LineRenderer`), dual-camera viewport splitter (`Camera.rect`), continuous rotation around `(1,1,0)`, and interactive `OnGUI` overlay |
+| `Assets/Shaders/Lab10FaceColors.shader` | CG Shader | Custom unlit per-vertex colour shader (`CGVR/Lab10/FaceColors`) with depth testing (`ZWrite On`, `ZTest LEqual`, `Cull Off`) |
+| `Assets/Editor/Lab10SceneMenu.cs` | Editor Menu | Menu items under **CGVR Labs** for scene validation and direct execution |
 
-### Editor Auto-Setup (in `unity_project/Assets/Editor/`)
-
-`Lab10SceneSetup.cs` — provides the menu item **Lab > Setup Lab 10 Scene** from the Unity editor menu bar.  
-Creates: a 6-face coloured rotating cube, dual split-screen cameras, UI labels ("Orthographic / Perspective"), a centre divider line, and ambient lighting.
+### Features & Controls
+- **Dual Viewport Mapping:**
+  - **Left Viewport (`Rect(0, 0, 0.5, 1)`):** Orthographic projection (parallel rays, true geometric scale preserved).
+  - **Right Viewport (`Rect(0.5, 0, 0.5, 1)`):** Perspective projection (`FOV = 45°`, natural depth foreshortening).
+- **Interactive GUI Overlay (`OnGUI`):**
+  - **`Space` / Play Button:** Pause / resume rotation.
+  - **`R` / Reset Button:** Reset angle to 0, speed to 30°/s, FOV to 45°, ortho size to 3.0.
+  - **`Up / Down Arrow`:** Increase / decrease angular rotation speed (0°–120°/s).
+  - **`H` / Toggle Button:** Show / hide parameter sliders and pipeline details.
+  - **Ortho Half-Size Slider (2.2 – 5.0):** Dynamically adjusts left camera's `orthographicSize`.
+  - **Perspective FOV Slider (30° – 70°):** Dynamically adjusts right camera's `fieldOfView`.
 
 ### How to Open & Run in Unity
 
 1. Open **Unity Hub**
-2. Click **Add** (or **Open > Add project from disk**)
+2. Click **Add** → **Add project from disk**
 3. Select the folder: `experiments/Experiment_10/unity_project`
-4. Open with **Unity 2022.3 LTS** (e.g. 2022.3.62f2)
-5. Create a new scene (**File > New Scene**) or use the default scene
-6. In the top menu bar, click **Lab > Setup Lab 10 Scene**
-7. Press **Play** (▶)
-   - **Left half** — Orthographic projection: parallel edges stay parallel, no foreshortening
-   - **Right half** — Perspective projection (FOV 45°): realistic depth foreshortening
+4. Open with your installed Unity version (e.g. **2022.3 LTS**)
+5. Press the **Play** button (▶) directly — the demo auto-bootstraps into any scene!
+   - Select the **Game** tab to interact with the sliders and controls.
 
 ### Pipeline Stages Demonstrated in Unity
 
 ```
-[Object Coordinates]  →  Model Matrix (rotation on all axes)
-       ↓
-[World Coordinates]   →  View Matrix (camera look-at)
-       ↓
-[Eye Coordinates]     →  Projection Matrix (Ortho left | Perspective right)
-       ↓
-[Clip Coordinates]    →  Perspective Division (/w)
-       ↓
-[NDC −1..1]           →  Viewport Matrix (Camera.rect splits screen 50/50)
-       ↓
+[Object Coordinates: (-1..1)^3] ──> Model Matrix (rotation around (1,1,0))
+       │
+[World Coordinates]             ──> View Matrix (LookAt from (4,3,6) to (0,0,0))
+       │
+[Eye / Camera Coordinates]      ──> Projection Matrix (Ortho left | Perspective right)
+       │
+[Clip Coordinates]              ──> Perspective Division (/w)
+       │
+[Normalized Device Coordinates] ──> Viewport Mapping (Left 50% vs Right 50%)
+       │
 [Screen Pixels]
 ```
 

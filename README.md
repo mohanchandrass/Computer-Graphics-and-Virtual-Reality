@@ -15,7 +15,7 @@ This repository contains ten computer graphics and virtual reality laboratory ex
 | **2** | [Implement the Midpoint Circle Drawing Algorithm](#experiment-2-midpoint-circle-drawing-algorithm) | [`Experiment_2/`](experiments/Experiment_2/) | [`exp2.py`](experiments/Experiment_2/exp2.py) |
 | **3** | [Implement 2D transformations using homogeneous coordinates](#experiment-3-2d-transformations-using-homogeneous-coordinates) | [`Experiment_3/`](experiments/Experiment_3/) | [`exp3.py`](experiments/Experiment_3/exp3.py) |
 | **4** | [Implement composite transformations using matrix representation](#experiment-4-composite-2d-transformations-using-matrix-representation) | [`Experiment_4/`](experiments/Experiment_4/) | [`exp4.py`](experiments/Experiment_4/exp4.py) |
-| **5** | [Implement the Cohen–Sutherland line clipping algorithm](#experiment-5-cohen-sutherland-line-clipping-algorithm) | [`Experiment_5/`](experiments/Experiment_5/) | [`exp5.py`](experiments/Experiment_5/exp5.py) |
+| **5** | [Implement the Cohenâ€“Sutherland line clipping algorithm](#experiment-5-cohen-sutherland-line-clipping-algorithm) | [`Experiment_5/`](experiments/Experiment_5/) | [`exp5.py`](experiments/Experiment_5/exp5.py) |
 | **6** | [Implement the Z-buffer algorithm for hidden surface removal](#experiment-6-z-buffer-algorithm-for-hidden-surface-removal) | [`Experiment_6/`](experiments/Experiment_6/) | [`exp6.py`](experiments/Experiment_6/exp6.py) |
 | **7** | [Implement the Phong illumination model for a 3D object](#experiment-7-phong-illumination-model-for-a-3d-object) | [`Experiment_7/`](experiments/Experiment_7/) | [`exp7.py`](experiments/Experiment_7/exp7.py) |
 | **8** | [Develop a basic OpenGL program using vertex and fragment shaders](#experiment-8-opengl-vertex-and-fragment-shaders) | [`Experiment_8/`](experiments/Experiment_8/) | [`exp8.py`](experiments/Experiment_8/exp8.py) |
@@ -78,7 +78,7 @@ This experiment implements the **Midpoint Circle Algorithm**, an efficient metho
     - If `p < 0`: `p += 2 * x + 1` (move east only)
     - If `p >= 0`: `y -= 1` and `p += 2 * (x - y) + 1` (move southeast)
 - **Symmetry plotting:** For each calculated point `(x, y)`, all 8 symmetric points are plotted:
-  - `(xc ± x, yc ± y)` and `(xc ± y, yc ± x)`
+  - `(xc Â± x, yc Â± y)` and `(xc Â± y, yc Â± x)`
 
 #### Key Insight
 The algorithm exploits the 8-way symmetry of circles, so only one octant needs to be calculated, and the rest are derived by symmetry.
@@ -102,7 +102,7 @@ This experiment demonstrates **2D geometric transformations** using homogeneous 
 
 #### Homogeneous Coordinates
 - Points represented as `[x, y, 1]` for transformation compatibility
-- All transformations use 3×3 matrices operating on homogeneous coordinate vectors
+- All transformations use 3Ã—3 matrices operating on homogeneous coordinate vectors
 
 #### Transformation Matrices
 
@@ -116,12 +116,12 @@ T(tx, ty) = [[1, 0, tx],
 
 **2. Rotation**
 ```
-R(angle) = [[cos(θ), -sin(θ), 0],
-            [sin(θ),  cos(θ), 0],
+R(angle) = [[cos(Î¸), -sin(Î¸), 0],
+            [sin(Î¸),  cos(Î¸), 0],
             [0,       0,      1]]
 ```
 - Rotates point by `angle` degrees counterclockwise
-- Uses `θ = math.radians(angle)` to convert to radians
+- Uses `Î¸ = math.radians(angle)` to convert to radians
 
 **3. Scaling**
 ```
@@ -152,7 +152,7 @@ Sh(shx, shy) = [[1, shx, 0],
 ### Visual Result
 <img src="experiments/Experiment_3/image.png" alt="Experiment 3 - 2D Transformations" width="650">
 
-*The image displays the original triangle (gray) and its transformed versions under translation, rotation (45°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
+*The image displays the original triangle (gray) and its transformed versions under translation, rotation (45Â°), scaling (0.5x), reflection about X-axis, and shearing (0.5), each shown in separate panels with their respective parameter labels.*
 
 ---
 
@@ -168,7 +168,7 @@ This experiment demonstrates **composite 2D geometric transformations** using ma
 
 #### Homogeneous Coordinates & 3x3 Matrices
 - **Scaling Matrix S:** `sx = 1.5, sy = 1.5`
-- **Rotation Matrix R:** `θ = 45°` (`math.radians(45)`)
+- **Rotation Matrix R:** `Î¸ = 45Â°` (`math.radians(45)`)
 - **Translation Matrix T:** `tx = 250, ty = 120`
 
 #### Composite Matrix Formula
@@ -357,7 +357,9 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 - **Pickup Radius:** Gathered when Euclidean distance $\sqrt{(P_x - C_x)^2 + (P_z - C_z)^2} < 1.3\text{m}$.
 
 ### Visual Result
-<img src="experiments/Experiment_9/image.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
+<img src="experiments/Experiment_9/image copy.png" alt="Experiment 9 - Simple Interactive 3D Scene" width="650">
+
+> **Live Demo (GIF):** [LAB9.gif](experiments/Experiment_9/LAB9.gif) — Full gameplay recording of the Unity 3D scene.
 
 *The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 
@@ -495,5 +497,37 @@ python projects/spider-man.py
 - Python 3.x
 - PyOpenGL
 - PyGLUT
+
+---
+
+### Case Study 3: RoomSpace AR — Interactive 3D Furniture Placement & Interior Design System
+
+**Folder:** [`projects/CaseStudy3_RoomSpace/`](projects/CaseStudy3_RoomSpace/)  
+**Case Study Document:** [`projects/CS4104_CG_VR_Case_Study_Assignment_With_RV_Logo.docx`](projects/CS4104_CG_VR_Case_Study_Assignment_With_RV_Logo.docx)  
+**Detailed Project Documentation:** [`projects/CaseStudy3_RoomSpace/README.md`](projects/CaseStudy3_RoomSpace/README.md)
+
+### Overview
+RoomSpace AR is a 3D architectural interior design and retail configurator developed in Unity 2022.3 LTS for **CS4104 Case Study 3 (Retail and Remote Commerce)**. The application features photorealistic CC0 Poly Haven 3D furniture, dynamic floor raycast placement, 360° yaw rotation manipulation, dual perspective/orthographic camera projection modes, physically-based rendering (PBR) wall materials, and JSON room state serialization.
+
+### Features
+- **Photorealistic Poly Haven 3D Assets:** Modern leather sofas, wooden coffee tables, armchairs, and potted plants with custom box and mesh colliders.
+- **Affine Transformation Pipeline:** Real-time object translation along the $Y = 0$ floor plane and continuous 360° yaw rotation via homogeneous transformation matrices.
+- **Window-to-Viewport Raycasting:** Screen-to-world raycasting translating pointer coordinates to physical room floor placement.
+- **Dual Projection Viewing Modes:** Seamless transition between a 3D orbiting perspective camera ($FOV = 55^\circ$) and an architectural top-down 2D orthographic plan ($Size = 5.5$).
+- **Cook-Torrance PBR Material Studio:** Dynamic in-app wall texture swatches (Warm Plaster, Beige Painted, Light Grey, Stone Feature) with normal perturbation and roughness.
+- **JSON Scene Serialization:** Save and load room arrangements persistently using robust JSON schemas.
+- **UI HUD & Hotkeys:** Interactive catalogue, inspector, toolbar, transient toast feedback, and `[H]` key to hide UI for cinematic rendering.
+
+### Visual Result
+<img src="projects/CaseStudy3_RoomSpace/Documentation/Screenshots/Application/roomspace_main_interface.png" alt="RoomSpace AR Main Application Interface" width="700">
+
+*The image shows the RoomSpace AR interface in Unity Game view with photorealistic furniture, active catalogue, and material customization studio.*
+
+### Video & GIF Demonstrations
+- **Room Overview & 3D Orbit:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/roomspace_overview_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/roomspace_overview_demo.gif)
+- **Camera Projection Modes:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/camera_mode_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/camera_mode_demo.gif)
+- **Furniture Catalogue & Placement:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/furniture_placement_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/furniture_placement_demo.gif)
+- **Object Manipulation & Rotation:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/furniture_manipulation_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/furniture_manipulation_demo.gif)
+- **PBR Material Studio:** [MP4 Video](projects/CaseStudy3_RoomSpace/Documentation/Videos/material_customization_demo.mp4) | [Animated GIF](projects/CaseStudy3_RoomSpace/Documentation/GIFs/material_customization_demo.gif)
 
 ---
