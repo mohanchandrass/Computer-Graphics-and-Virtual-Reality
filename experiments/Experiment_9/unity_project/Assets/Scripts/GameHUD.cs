@@ -55,3 +55,4 @@ public class GameHUD : MonoBehaviour
             winText.gameObject.SetActive(_collected >= totalCollectibles);
     }
 }
+

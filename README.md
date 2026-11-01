@@ -19,8 +19,8 @@ This repository contains ten computer graphics and virtual reality laboratory ex
 | **6** | [Implement the Z-buffer algorithm for hidden surface removal](#experiment-6-z-buffer-algorithm-for-hidden-surface-removal) | [`Experiment_6/`](experiments/Experiment_6/) | [`exp6.py`](experiments/Experiment_6/exp6.py) |
 | **7** | [Implement the Phong illumination model for a 3D object](#experiment-7-phong-illumination-model-for-a-3d-object) | [`Experiment_7/`](experiments/Experiment_7/) | [`exp7.py`](experiments/Experiment_7/exp7.py) |
 | **8** | [Develop a basic OpenGL program using vertex and fragment shaders](#experiment-8-opengl-vertex-and-fragment-shaders) | [`Experiment_8/`](experiments/Experiment_8/) | [`exp8.py`](experiments/Experiment_8/exp8.py) |
-| **9** | [Create a simple interactive 3D scene using Unity](#experiment-9-simple-interactive-3d-scene) | [`Experiment_9/`](experiments/Experiment_9/) | [`exp9.py`](experiments/Experiment_9/exp9.py) |
-| **10** | [Implement the 3D viewing pipeline, including projection and viewport mapping](#experiment-10-3d-viewing-pipeline-projection-and-viewport-mapping) | [`Experiment_10/`](experiments/Experiment_10/) | [`exp10.py`](experiments/Experiment_10/exp10.py) |
+| **9** | [Create a simple interactive 3D scene using Unity](#experiment-9-simple-interactive-3d-scene) | [`Experiment_9/`](experiments/Experiment_9/) | [`exp9.py`](experiments/Experiment_9/exp9.py) / [`unity_project/`](experiments/Experiment_9/unity_project/) |
+| **10** | [Implement the 3D viewing pipeline, including projection and viewport mapping](#experiment-10-3d-viewing-pipeline-projection-and-viewport-mapping) | [`Experiment_10/`](experiments/Experiment_10/) | [`exp10.py`](experiments/Experiment_10/exp10.py) / [`unity_project/`](experiments/Experiment_10/unity_project/) |
 
 ---
 
@@ -331,7 +331,8 @@ $$\text{FragColor} = \text{vec4}(\text{vertexColor} \times (0.75 + 0.25 \cdot \t
 ## Experiment 9: Simple Interactive 3D Scene
 
 **Folder:** [`experiments/Experiment_9/`](experiments/Experiment_9/)  
-**Program:** [`experiments/Experiment_9/exp9.py`](experiments/Experiment_9/exp9.py)
+**Program:** [`experiments/Experiment_9/exp9.py`](experiments/Experiment_9/exp9.py)  
+**Unity Project:** [`experiments/Experiment_9/unity_project/`](experiments/Experiment_9/unity_project/)
 
 ### Overview
 This experiment demonstrates the construction of a **simple interactive 3D scene**, incorporating game engine concepts (as seen in Unity) directly in Python using OpenGL. The scene features a 3D arena floor grid, a controllable player character, third-person camera tracking, 3D obstacle blocks, rotating animated collectible gems, collision detection, and a real-time Heads-Up Display (HUD).
@@ -365,7 +366,8 @@ View matrix is set via `gluLookAt(cam_x, cam_y, cam_z, player_x, player_y + 0.6,
 ## Experiment 10: 3D Viewing Pipeline, Projection and Viewport Mapping
 
 **Folder:** [`experiments/Experiment_10/`](experiments/Experiment_10/)  
-**Program:** [`experiments/Experiment_10/exp10.py`](experiments/Experiment_10/exp10.py)
+**Program:** [`experiments/Experiment_10/exp10.py`](experiments/Experiment_10/exp10.py)  
+**Unity Project:** [`experiments/Experiment_10/unity_project/`](experiments/Experiment_10/unity_project/)
 
 ### Overview
 This experiment implements the complete **3D Viewing Pipeline**, demonstrating how 3D geometric models are converted into a 2D screen image through sequential coordinate transformations. It highlights the difference between **Orthographic Projection** (engineering / CAD perspective) and **Perspective Projection** (natural human vision) using side-by-side viewports displaying an animated multi-colored 3D cube.

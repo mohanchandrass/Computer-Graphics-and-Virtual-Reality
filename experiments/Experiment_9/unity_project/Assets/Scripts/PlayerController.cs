@@ -77,3 +77,4 @@ public class PlayerController : MonoBehaviour
         _cc.Move(motion);
     }
 }
+

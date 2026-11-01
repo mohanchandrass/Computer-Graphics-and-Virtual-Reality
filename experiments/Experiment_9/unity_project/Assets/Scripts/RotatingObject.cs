@@ -15,3 +15,4 @@ public class RotatingObject : MonoBehaviour
         transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime, Space.World);
     }
 }
+

@@ -15,3 +15,4 @@ public class Lab10RotatingCube : MonoBehaviour
         transform.Rotate(rotationSpeed * Time.deltaTime, Space.World);
     }
 }
+

@@ -1,6 +1,7 @@
 # Experiment 10: 3D Viewing Pipeline, Projection and Viewport Mapping
 
-**File:** `exp10.py`
+**File:** `exp10.py`  
+**Unity Project:** `unity_project/`
 
 ## Overview
 This experiment implements the complete **3D Viewing Pipeline** in computer graphics, transforming geometric primitives from 3D object space to a 2D digital screen. The program demonstrates the contrast between **Orthographic Projection** (parallel rays preserving geometric proportions) and **Perspective Projection** (converging rays modeling realistic human depth perception) using side-by-side viewports displaying an animated 3D multi-colored cube with depth buffering.
@@ -68,7 +69,9 @@ $$y_s = y_v + \frac{y_{\text{ndc}} + 1}{2} \cdot h_v$$
 
 *The image demonstrates the complete 3D viewing pipeline in a side-by-side comparison: the left viewport displays an orthographic projection where parallel cube edges remain strictly parallel without foreshortening (ideal for engineering/CAD), while the right viewport displays a perspective projection with natural foreshortening and vanishing points (modeling real-world human vision).*
 
-## How to Run
+---
+
+## Python Execution
 
 ```bash
 python exp10.py
@@ -79,7 +82,7 @@ To capture a screenshot and exit headlessly:
 python exp10.py --headless
 ```
 
-### Controls (Interactive Mode)
+### Controls (Python Interactive Mode)
 - The 3D cube continuously rotates along multiple axes in real time across both viewports simultaneously.
 - Press `Esc` or close window to exit.
 
@@ -89,47 +92,49 @@ python exp10.py --headless
 - GLFW (`pip install glfw`)
 - Pillow (`pip install pillow`)
 
-
 ---
 
 ## Unity Implementation
 
-A Unity 2022.3 LTS C# implementation of the complete 3D Viewing Pipeline is included in `projects/New Unity Project/`.
+A complete standalone Unity 2022.3 LTS project implementing the 3D Viewing Pipeline is included in the `unity_project/` directory.
 
-### Scripts (in `Assets/Scripts/Lab10/`)
+### Scripts (in `unity_project/Assets/Scripts/`)
 
 | Script | Purpose |
 |---|---|
-| `Lab10ViewingPipeline.cs` | Runtime camera builder � creates left (Orthographic) and right (Perspective FOV 45) cameras via `Camera.rect` viewport splitting |
+| `Lab10ViewingPipeline.cs` | Runtime camera builder — creates left (Orthographic) and right (Perspective FOV 45°) cameras via `Camera.rect` viewport splitting |
 | `Lab10RotatingCube.cs` | Rotates the coloured multi-face cube on all three axes continuously |
 
-### Editor Auto-Setup (in `Assets/Editor/Lab10/`)
+### Editor Auto-Setup (in `unity_project/Assets/Editor/`)
 
-`Lab10SceneSetup.cs` � run **Lab > Setup Lab 10 Scene** from the Unity menu bar.
-Creates: a 6-face coloured rotating cube, dual split-screen cameras, UI labels, a centre divider line, and ambient lighting.
+`Lab10SceneSetup.cs` — provides the menu item **Lab > Setup Lab 10 Scene** from the Unity editor menu bar.  
+Creates: a 6-face coloured rotating cube, dual split-screen cameras, UI labels ("Orthographic / Perspective"), a centre divider line, and ambient lighting.
 
-### How to Open & Run
+### How to Open & Run in Unity
 
-1. Open **Unity Hub** and add the project at `projects/New Unity Project/`
-2. Open the project in **Unity 2022.3 LTS**
-3. Open an **empty scene** (File > New Scene)
-4. In the menu bar select **Lab > Setup Lab 10 Scene**
-5. Press **Play**
-   - **Left half** � Orthographic projection: parallel edges stay parallel, no foreshortening
-   - **Right half** � Perspective projection (FOV 45): realistic depth foreshortening
+1. Open **Unity Hub**
+2. Click **Add** (or **Open > Add project from disk**)
+3. Select the folder: `experiments/Experiment_10/unity_project`
+4. Open with **Unity 2022.3 LTS** (e.g. 2022.3.62f2)
+5. Create a new scene (**File > New Scene**) or use the default scene
+6. In the top menu bar, click **Lab > Setup Lab 10 Scene**
+7. Press **Play** (▶)
+   - **Left half** — Orthographic projection: parallel edges stay parallel, no foreshortening
+   - **Right half** — Perspective projection (FOV 45°): realistic depth foreshortening
 
 ### Pipeline Stages Demonstrated in Unity
 
 ```
-[Object Coordinates]  ->  Model Matrix (rotation on all axes)
-       |
-[World Coordinates]   ->  View Matrix (camera look-at)
-       |
-[Eye Coordinates]     ->  Projection Matrix (Ortho left | Perspective right)
-       |
-[Clip Coordinates]    ->  Perspective Division (/w)
-       |
-[NDC -1..1]           ->  Viewport Matrix (Camera.rect splits screen 50/50)
-       |
+[Object Coordinates]  →  Model Matrix (rotation on all axes)
+       ↓
+[World Coordinates]   →  View Matrix (camera look-at)
+       ↓
+[Eye Coordinates]     →  Projection Matrix (Ortho left | Perspective right)
+       ↓
+[Clip Coordinates]    →  Perspective Division (/w)
+       ↓
+[NDC −1..1]           →  Viewport Matrix (Camera.rect splits screen 50/50)
+       ↓
 [Screen Pixels]
 ```
+

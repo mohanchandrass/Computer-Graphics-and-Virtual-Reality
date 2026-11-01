@@ -75,3 +75,4 @@ public class Lab10ViewingPipeline : MonoBehaviour
         return cam;
     }
 }
+

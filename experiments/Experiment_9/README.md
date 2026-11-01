@@ -1,6 +1,7 @@
 # Experiment 9: Simple Interactive 3D Scene
 
-**File:** `exp9.py`
+**File:** `exp9.py`  
+**Unity Project:** `unity_project/`
 
 ## Overview
 This experiment demonstrates the design and implementation of a **simple interactive 3D scene**, fulfilling both the core virtual reality / real-time graphics principles and game engine architectural patterns (such as those used in Unity). The program constructs a 3D virtual environment complete with an arena floor grid, a movable player avatar, third-person smooth camera tracking, 3D obstacle blocks, rotating animated collectible gems, collision detection, and a real-time Heads-Up Display (HUD).
@@ -56,7 +57,9 @@ The implementation directly mirrors the component-based architecture of Unity 3D
 
 *The image shows the interactive 3D scene in real time: a third-person view of the player avatar navigating a checkered arena floor, surrounded by 3D obstacles and rotating collectible diamond gems, accompanied by an integrated Heads-Up Display (HUD) showing collectibles gathered, player telemetry, and interactive control bindings.*
 
-## How to Run
+---
+
+## Python Execution
 
 ```bash
 python exp9.py
@@ -67,7 +70,7 @@ To capture a screenshot and exit headlessly:
 python exp9.py --headless
 ```
 
-### Controls (Interactive Mode)
+### Controls (Python Interactive Mode)
 - **`W` / `Up Arrow`**: Move forward
 - **`S` / `Down Arrow`**: Move backward
 - **`A` / `Left Arrow`**: Turn left
@@ -82,38 +85,40 @@ python exp9.py --headless
 - GLFW (`pip install glfw`)
 - Pillow (`pip install pillow`)
 
-
 ---
 
 ## Unity Implementation
 
-A full Unity 2022.3 LTS C# implementation is also included inside the shared Unity project at `projects/New Unity Project/`.
+A complete standalone Unity 2022.3 LTS project is included in the `unity_project/` directory.
 
-### Scripts (in `Assets/Scripts/Lab9/`)
+### Scripts (in `unity_project/Assets/Scripts/`)
 
 | Script | Purpose |
 |---|---|
 | `PlayerController.cs` | CharacterController-based WASD / arrow-key movement, Space jump, R reset, Esc quit |
-| `CameraFollow.cs` | Smooth third-person camera — `Vector3.Lerp` orbit behind & above player |
+| `CameraFollow.cs` | Smooth third-person camera â€” `Vector3.Lerp` orbit behind & above player |
 | `Collectible.cs` | `OnTriggerEnter` pickup; harmonic bob + Y-axis spin animation |
 | `RotatingObject.cs` | Continuous Y-axis rotation for obstacle cubes |
-| `GameHUD.cs` | Singleton UI — shows "Collected X/5" counter and "You Win!" overlay |
+| `GameHUD.cs` | Singleton UI â€” shows "Collected X/5" counter and "You Win!" overlay |
 
-### Editor Auto-Setup (in `Assets/Editor/Lab9/`)
+### Editor Auto-Setup (in `unity_project/Assets/Editor/`)
 
-`LabSceneAutoSetup.cs` — run **Lab ? Setup Lab 9 Scene** from the Unity menu bar.
-This one-click builder creates the entire scene: ground, player, camera, 4 rotating obstacles, 5 collectible gems, and the HUD canvas.
+`LabSceneAutoSetup.cs` â€” provides the menu item **Lab > Setup Lab 9 Scene** from the Unity editor menu bar.  
+This one-click builder instantiates the complete environment: ground plane, player capsule with CharacterController, third-person camera with tracking script, 4 rotating obstacle cubes, 5 collectible spheres with triggers, and a full HUD canvas overlay.
 
-### How to Open & Run
+### How to Open & Run in Unity
 
-1. Open **Unity Hub** and add the project at `projects/New Unity Project/`
-2. Open the project in **Unity 2022.3 LTS**
-3. Open an **empty scene** (File > New Scene)
-4. In the menu bar select **Lab > Setup Lab 9 Scene**
-5. Press **Play** — use WASD / Space to navigate and collect all 5 gems
+1. Open **Unity Hub**
+2. Click **Add** (or **Open > Add project from disk**)
+3. Select the folder: `experiments/Experiment_9/unity_project`
+4. Open with **Unity 2022.3 LTS** (e.g. 2022.3.62f2)
+5. Create a new scene (**File > New Scene**) or use the default scene
+6. In the top menu bar, click **Lab > Setup Lab 9 Scene**
+7. Click the **Play** button (â–¶) to run the interactive 3D scene
 
 ### Unity Controls
-- **`W / A / S / D`** or **Arrow Keys** — Move and turn
-- **`Space`** — Jump
-- **`R`** — Reset player and respawn collectibles
-- **`Esc`** — Quit (stops Play mode in Editor)
+- **`W / A / S / D`** or **Arrow Keys** â€” Move & turn
+- **`Space`** â€” Jump
+- **`R`** â€” Reset player & respawn collectibles
+- **`Esc`** â€” Stop / Quit
+
